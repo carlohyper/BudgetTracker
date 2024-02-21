@@ -11,7 +11,6 @@ export function Welcome({ navigation }: Props) {
         title="fuck you dave"
         onPress={() => navigation.navigate("Home")}
       />
-      <Button title="Budget" onPress={() => navigation.navigate("Budget")} />
     </View>
   );
 }
