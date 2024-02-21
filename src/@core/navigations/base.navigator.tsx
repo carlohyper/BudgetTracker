@@ -8,8 +8,10 @@ import { RootStackParamList } from '../../types'
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export function RootNavigator () {
+  const initialRouteName: keyof RootStackParamList = 'Welcome';
+
   return (
-    <Stack.Navigator initialRouteName='Welcome'>
+    <Stack.Navigator initialRouteName={initialRouteName}>
       <Stack.Screen
         name='Welcome'
         component={Welcome}
