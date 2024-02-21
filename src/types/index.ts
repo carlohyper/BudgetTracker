@@ -1,0 +1,1 @@
+export * from './navigation-props.type'
