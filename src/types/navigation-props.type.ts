@@ -13,16 +13,6 @@ export type BudgetStackParamList = {
   "Budget Details": undefined;
 };
 
-export type BudgetStackParamList = {
-  "Budget List": undefined;
-  "Budget Details": undefined;
-};
-
-export type BudgetStackParamList = {
-  "Budget List": undefined;
-  "Budget Details": undefined;
-};
-
 export type Props = NativeStackScreenProps<RootStackParamList, "Welcome">;
 
 export type BudgetRouteProps = NativeStackScreenProps<
