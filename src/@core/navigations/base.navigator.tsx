@@ -3,13 +3,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { Welcome } from "./welcome.navigator";
 import { HomeScreen } from "./home-screen.navigator";
-import { BudgetDetailScreen } from "@scenes/budget";
 import { RootStackParamList } from "../../types";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function RootNavigator() {
-  const initialRouteName: keyof RootStackParamList = "Welcome";
+  const initialRouteName: keyof RootStackParamList = "Home";
 
   return (
     <Stack.Navigator initialRouteName={initialRouteName}>
