@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { BudgetDetailScreen } from "@scenes/budget";
+import { BudgetNavigator } from "./budget.navigator";
 
 export type BottomTabParamList = {
   Dashboard: { iconName: string };
@@ -30,7 +30,7 @@ export function HomeScreen() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <Tab.Navigator>
+    <Tab.Navigator initialRouteName="Dashboard">
       <Tab.Screen
         name="Dashboard"
         component={Dashboard}
@@ -43,8 +43,11 @@ export function HomeScreen() {
       />
       <Tab.Screen
         name="Budget"
-        component={BudgetDetailScreen}
+        component={BudgetNavigator}
         initialParams={{ iconName: "radio-button-on" }}
+        options={{
+          headerShown: false,
+        }}
       />
     </Tab.Navigator>
   );
