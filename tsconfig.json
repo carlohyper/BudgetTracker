@@ -2,6 +2,7 @@
   "extends": "@tsconfig/react-native/tsconfig.json",
   "compilerOptions": {
     "strict": true,
+    "types": ["node", "react-native", "styled-components-react-native"],
     "baseUrl": "./",
     "paths": {
       "@core/navigations": ["src/@core/navigations"],
