@@ -1,1 +1,2 @@
-export { default as BudgetDetailScreen } from "./screens/budget-detail.screen";
+export { default as BudgetScreen } from "./screens/budget.screen";
+export { default as BudgetDetailsScreen } from "./screens/budget-details.screen";
