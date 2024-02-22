@@ -27,13 +27,6 @@ export function RootNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
-        name="Budget"
-        component={BudgetDetailScreen}
-        options={{
-          headerShown: true,
-        }}
-      />
     </Stack.Navigator>
   );
 }
