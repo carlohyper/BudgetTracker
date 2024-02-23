@@ -7,6 +7,7 @@ import {
   AddNewBudgetScreen,
   NewBudgetItemsScreen
 } from '@scenes/budget';
+import { AddExpenseScreen } from '@scenes/expense';
 
 const Stack = createNativeStackNavigator<AddStackParamList>();
 
@@ -19,6 +20,8 @@ export function AddNavigator() {
       <Stack.Screen name="Add Option" component={AddOptionScreen} />
       <Stack.Screen name="New Budget" component={AddNewBudgetScreen} />
       <Stack.Screen name="New Budget Items" component={NewBudgetItemsScreen} />
+      <Stack.Screen name="Add Expense" component={AddExpenseScreen} />
+
     </Stack.Navigator>
   )
 }
