@@ -6,6 +6,10 @@ export const useBudgetDetails = () => {
   const navigation = useNavigation();
   const [selectedBtn, setSelectedBtn] = React.useState(0);
 
+  const DATA = [
+    
+  ];
+
   const BUTTONS = [
     {
       name: "Plan",
