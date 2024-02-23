@@ -8,7 +8,7 @@ export default function ({ navigation }: AddRouteProps) {
   return (
     <Container>
       <ListOptions>
-        <ListItem>
+        <ListItem onPress={() => navigation.navigate("Add Expense")}>
             <ListTitleContainer>
                 <MaterialCommunityIcons name="store-plus-outline" size={28} color="#81d8d0" />
                 <ListTitle>New expense</ListTitle>
