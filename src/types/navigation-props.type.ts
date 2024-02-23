@@ -22,7 +22,7 @@ export type BudgetRouteProps = NativeStackScreenProps<
 
 export type AddStackParamList = {
   "Add Option": undefined;
-  "New Expense": undefined;
+  "Add Expense": undefined;
   "New Budget": undefined;
   "New Wallet": undefined;
   "New Budget Items": undefined;
