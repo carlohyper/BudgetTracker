@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { BudgetNavigator } from "./budget.navigator";
 import { AddNavigator } from "./add.navigator";
+import { Button } from "src/components/Button";
 
 export type BottomTabParamList = {
   Dashboard: { iconName: string };
@@ -15,6 +16,7 @@ const Dashboard = () => {
   return (
     <View>
       <Text>Dashboard</Text>
+      <Button>Next</Button>
     </View>
   );
 };
