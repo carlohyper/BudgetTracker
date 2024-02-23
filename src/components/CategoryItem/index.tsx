@@ -3,8 +3,9 @@ import styled from "styled-components/native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { ViewProps } from "react-native";
+import { Text } from "../Text";
 
-type IconNames =
+export type IconNames =
   | "piggy-bank"
   | "movie"
   | "music-note"
@@ -45,14 +46,12 @@ export const CategoryItem: React.FC<CategoryItemProps> = ({
       <IconContainer shape={shape}>
         <MaterialCommunityIcons name={iconName} size={18} />
       </IconContainer>
-      <IconText>{text}</IconText>
+      <Text fontSize={12} fontWeight={600}>
+        {text}
+      </Text>
     </Container>
   );
 };
-
-const IconText = styled.Text`
-  font-weight: 600;
-`;
 
 const Container = styled.View`
   flex-direction: ${({ textPosition }: CategoryItemProps) =>
