@@ -22,14 +22,14 @@ export const BudgetPlan: React.FC<Partial<BudgetPlanProps>> = ({ data }) => {
       <DynamicCard
         title="Utilities"
         onPress={() => Alert.alert("Add Utilities")}
-        subLabel={<DynamicCurrency amount="3000" />}
+        subLabel={<DynamicCurrency amount="5000" />}
       >
         <Text>List of Utilities Here</Text>
       </DynamicCard>
       <DynamicCard
         title="Savings"
         onPress={() => Alert.alert("Add Savings")}
-        subLabel={<DynamicCurrency amount="3000" />}
+        subLabel={<DynamicCurrency amount="2000" />}
       >
         <Text>List of Savings Here</Text>
       </DynamicCard>
