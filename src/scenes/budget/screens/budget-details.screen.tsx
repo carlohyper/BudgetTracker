@@ -1,9 +1,11 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Alert } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { Layout, DynamicCard } from "@components";
+import { DynamicCurrency, Layout } from "@components";
+import { BudgetPlan, BudgetActual, BudgetInsights } from "../components";
 import {
+  ActionContainer,
   DateSelector,
   DetailContainer,
   PlannedAction,
@@ -32,10 +34,23 @@ export default () => {
           </DateSelector>
           <PlannedExpenses>
             <PlannedHeader>
-              <FontAwesome5 name="chart-pie" style={styles.icon} size={45} />
+              {/* <FontAwesome5 name="chart-pie" style={styles.icon} size={45} /> */}
+              <MaterialCommunityIcons
+                name="circle-slice-5"
+                style={styles.icon}
+                size={45}
+              />
               <View>
                 <Text style={styles.label}>Planned Expenses</Text>
-                <Text style={styles.cost}>Php 5,000</Text>
+                {/* <Text style={styles.cost}>
+                  <MaterialCommunityIcons
+                    name="currency-php"
+                    style={styles.icon}
+                    size={20}
+                  />
+                  5,000
+                </Text> */}
+                <DynamicCurrency amount="5000" size={20} weight="bold" />
               </View>
             </PlannedHeader>
             <PlannedAction>
@@ -43,6 +58,7 @@ export default () => {
                 <TouchableOpacity
                   style={styles.actionBtnWrapper}
                   onPress={() => setSelectedBtn(index)}
+                  key={index}
                 >
                   <Text
                     style={[
@@ -56,34 +72,9 @@ export default () => {
               ))}
             </PlannedAction>
           </PlannedExpenses>
-          <DynamicCard
-            title="Income"
-            isExpenses={false}
-            onPress={() => Alert.alert("Add Income")}
-          >
-            <Text>List of Income Here</Text>
-          </DynamicCard>
-          <DynamicCard
-            title="Utilities"
-            onPress={() => Alert.alert("Add Utilities")}
-            subLabel={<Text>Php 5000</Text>}
-          >
-            <Text>List of Utilities Here</Text>
-          </DynamicCard>
-          <DynamicCard
-            title="Savings"
-            onPress={() => Alert.alert("Add Savings")}
-            subLabel={<Text>Php 2000</Text>}
-          >
-            <Text>List of Savings Here</Text>
-          </DynamicCard>
-          <DynamicCard
-            title="Miscellemeous"
-            onPress={() => Alert.alert("Add Miscellemeous")}
-            subLabel={<Text>Php 3000</Text>}
-          >
-            <Text>List of Miscellemeous Here</Text>
-          </DynamicCard>
+          {BUTTONS[selectedBtn].name === "Plan" && <BudgetPlan />}
+          {BUTTONS[selectedBtn].name === "Actual" && <BudgetActual />}
+          {BUTTONS[selectedBtn].name === "Insights" && <BudgetInsights />}
         </DetailContainer>
       </StyledScrollView>
     </Layout>

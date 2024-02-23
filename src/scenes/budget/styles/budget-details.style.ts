@@ -36,6 +36,12 @@ export const PlannedAction = styled.View`
   column-gap: 10px;
 `;
 
+export const ActionContainer = styled.View`
+  flex-direction: column;
+  justify-content: space-between;
+  row-gap: 20px;
+`;
+
 export const styles = StyleSheet.create({
   label: {
     fontSize: 15,
