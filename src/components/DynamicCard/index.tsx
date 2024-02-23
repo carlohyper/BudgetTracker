@@ -17,6 +17,8 @@ const CardContainer = styled.View`
   background-color: #fff;
   border-radius: 30px;
   border: 1px solid #eee;
+  width: 90%;
+  align-self: center;
 `;
 
 const CardHeader = styled.View`
