@@ -19,3 +19,15 @@ export type BudgetRouteProps = NativeStackScreenProps<
   BudgetStackParamList,
   "Budget List"
 >;
+
+export type AddStackParamList = {
+  "Add Option": undefined;
+  "New Expense": undefined;
+  "New Budget": undefined;
+  "New Wallet": undefined;
+}
+
+export type AddRouteProps = NativeStackScreenProps<
+  AddStackParamList,
+  "Add Option"
+>;

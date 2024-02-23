@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { BudgetNavigator } from "./budget.navigator";
+import { AddNavigator } from "./add.navigator";
 
 export type BottomTabParamList = {
   Dashboard: { iconName: string };
@@ -14,13 +15,6 @@ const Dashboard = () => {
   return (
     <View>
       <Text>Dashboard</Text>
-    </View>
-  );
-};
-const Add = () => {
-  return (
-    <View>
-      <Text>Add</Text>
     </View>
   );
 };
@@ -38,7 +32,7 @@ export function HomeScreen() {
       />
       <Tab.Screen
         name="Add"
-        component={Add}
+        component={AddNavigator}
         initialParams={{ iconName: "add-circle" }}
       />
       <Tab.Screen
