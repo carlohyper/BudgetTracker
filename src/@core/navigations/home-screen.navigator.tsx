@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { BudgetNavigator } from "./budget.navigator";
 import { AddNavigator } from "./add.navigator";
 import { Button } from "src/components/Button";
+import { CategoryItem } from "@components";
 
 export type BottomTabParamList = {
   Dashboard: { iconName: string };
@@ -17,6 +18,12 @@ const Dashboard = () => {
     <View>
       <Text>Dashboard</Text>
       <Button>Next</Button>
+      <CategoryItem
+        shape="circle"
+        iconName="wifi"
+        text="Wifi"
+        textPosition="right"
+      />
     </View>
   );
 };
