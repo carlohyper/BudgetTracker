@@ -1,12 +1,15 @@
 import React from 'react'
 import styled from 'styled-components/native';
-import { Controller, SubmitHandler } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 import { useAddNewBudgetDetails } from '../hooks/use-add-new-budget-details.hook';
 
-const AddNewBudget = () => {
+export default () => {
     const { handleSubmit, navigation, isValid, control} = useAddNewBudgetDetails()
-    const onSubmit = (data: any) => console.log(data)
+    const onSubmit = (data: any) => {
+        console.log(data)
+        navigation.navigate("New Budget Items")
+    }
   return (
     <Container>
         <ContentContainer>
@@ -105,10 +108,4 @@ const ButtonTitle = styled.Text`
     text-align: center;
 `
 
-// const TitleContainer = styled.View`
-//     padding: 14px;
-//     border-radius: 5px;
-//     background-color: #E5E4E2;
-// `
 
-export default AddNewBudget
