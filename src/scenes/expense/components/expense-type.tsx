@@ -10,9 +10,10 @@ import { Categories } from "./categories.modal";
 export interface ExpenseType {
   showModal: () => void;
   selectedCategory: Categories | undefined;
+  selectType: (value: "expense" | "income") => void;
 }
 
-export default ({ showModal, selectedCategory }: ExpenseType) => {
+export default ({ showModal, selectedCategory, selectType }: ExpenseType) => {
   const { expenseType, selectedType, setSelectedType } = useAddExpense();
   return (
     <>
@@ -21,7 +22,10 @@ export default ({ showModal, selectedCategory }: ExpenseType) => {
           <ExpenseTypeItem
             key={i}
             state={i === selectedType ? true : false}
-            onPress={() => setSelectedType(i)}
+            onPress={() => {
+              setSelectedType(i);
+              selectType(i === 0 ? "expense" : "income");
+            }}
           >
             <ExpenseTypeItemText state={i === selectedType ? true : false}>
               {expense.name}
