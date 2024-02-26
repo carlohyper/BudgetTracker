@@ -27,7 +27,6 @@ const ExpenseForm = ({ showModal, selectedCategory }: IExpenseForm) => {
         <FormListItem title="Category" onPress={showModal} />
       )}
 
-      <FormListItem title="Date" />
     </View>
   );
 };

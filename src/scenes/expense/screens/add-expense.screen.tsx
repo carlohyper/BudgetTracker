@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import { Controller, FieldValues } from "react-hook-form";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import DateTimePicker from 'react-native-ui-datepicker';
+
+import { Button } from "@components";
 import { useExpenseStore } from "src/stores/expense.store";
 import { ExpenseType } from "../components";
 import { useAddExpense } from "../hooks/use-add-expense.hook";
 import CategoriesModal, { Categories } from "../components/categories.modal";
-import { Button } from "@components";
 
 export default () => {
   const {
@@ -17,33 +19,35 @@ export default () => {
 
   const [isModalShown, setIsModalShown] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<Categories>();
+  const { control, date, handleSubmit, setDate, setValue } = useAddExpense();
   const [selectedType, setSelectedType] = useState<"expense" | "income">();
-  const { control, handleSubmit, setValue } = useAddExpense();
+
 
   const onSubmit = (data: FieldValues) => {
     // addExpense(data)
-    const currentMonth = new Date().getMonth() + 1;
+    // const currentMonth = new Date().getMonth() + 1;
 
-    if (selectedType === "expense") {
-      addExpense({
-        id: "kalsdjl",
-        amount: parseFloat(data.amount),
-        category: {
-          icon: "piggy-bank",
-          name: "test",
-        },
-        date: currentMonth.toString(),
-      });
-    } else {
-      addIncome({
-        id: "kalsjdkla",
-        amount: parseInt(data.amount),
-        incomeName: "test",
-        icon: "piggy-bank",
-        date: currentMonth.toString(),
-      });
-    }
-    console.log(storeData);
+    // if (true) {
+    //   addExpense({
+    //     id: "kalsdjl",
+    //     amount: parseFloat(data.amount),
+    //     category: {
+    //       icon: "piggy-bank",
+    //       name: "test",
+    //     },
+    //     date: currentMonth.toString(),
+    //   });
+    // } else {
+    //   addIncome({
+    //     id: "kalsjdkla",
+    //     amount: parseInt(data.amount),
+    //     incomeName: "test",
+    //     icon: "piggy-bank",
+    //     date: currentMonth.toString(),
+    //   });
+    // }
+    // console.log(storeData);
+    console.log({...data, date})
   };
 
   const selectCategory = (value: Categories) => {
@@ -85,6 +89,22 @@ export default () => {
           selectedCategory={selectedCategory}
           selectType={selectType}
         />
+
+        <Controller
+          name="date"
+          control={control}
+          render={({ field }) => (
+            <DateTimePicker
+            mode="single"
+            date={date}
+            selectedItemColor="black"
+            onChange={({ date }) => {
+              setDate(date)
+            }}
+          />
+          )}
+        />
+
       </Card>
 
       <Button onPress={handleSubmit(onSubmit)}>Save</Button>
