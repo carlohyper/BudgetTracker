@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { AddStackParamList } from "@types";
 import { AddOptionScreen } from "@scenes/add-option";
 import { AddNewBudgetScreen, NewBudgetItemsScreen } from "@scenes/budget";
-import { AddExpenseScreen, CategoriesScreen } from "@scenes/expense";
+import { AddExpenseScreen } from "@scenes/expense";
 
 const Stack = createNativeStackNavigator<AddStackParamList>();
 
@@ -20,7 +20,6 @@ export function AddNavigator() {
       <Stack.Screen name="New Budget" component={AddNewBudgetScreen} />
       <Stack.Screen name="New Budget Items" component={NewBudgetItemsScreen} />
       <Stack.Screen name="Add Expense" component={AddExpenseScreen} />
-      <Stack.Screen name="Categories" component={CategoriesScreen} />
     </Stack.Navigator>
   );
 }

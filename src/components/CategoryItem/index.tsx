@@ -33,6 +33,8 @@ export interface CategoryItemProps extends ViewProps {
   shape?: "circle" | "rounded";
   iconName?: IconNames;
   textPosition?: "right" | "bottom";
+  onPress?: () => void;
+  fontSize?: number;
 }
 
 export const CategoryItem: React.FC<CategoryItemProps> = ({
@@ -40,13 +42,15 @@ export const CategoryItem: React.FC<CategoryItemProps> = ({
   textPosition = "right",
   shape = "circle",
   iconName,
+  fontSize = 12,
+  onPress = () => {},
 }) => {
   return (
-    <Container textPosition={textPosition}>
-      <IconContainer shape={shape}>
+    <Container textPosition={textPosition} onPress={() => onPress}>
+      <IconContainer shape={shape} onPress={onPress}>
         <MaterialCommunityIcons name={iconName} size={18} />
       </IconContainer>
-      <Text fontSize={12} fontWeight={600}>
+      <Text fontSize={fontSize} fontWeight={600}>
         {text}
       </Text>
     </Container>
@@ -61,7 +65,7 @@ const Container = styled.View`
     textPosition === "bottom" ? 10 : 20}px;
 `;
 
-const IconContainer = styled.View`
+const IconContainer = styled.TouchableOpacity`
   border-radius: ${({ shape }: CategoryItemProps) =>
     shape === "circle" ? 50 : 10}px;
   background-color: #8e7ab5;
