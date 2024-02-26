@@ -6,12 +6,40 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { ExpenseType } from "../components";
 import { useAddExpense } from "../hooks/use-add-expense.hook";
 
+import { useExpenseStore} from "src/stores/expense.store";
 
 export default () => {
-	const { control, handleSubmit, navigation } = useAddExpense();
+	const { control, handleSubmit, selectedType, setValue, navigation } = useAddExpense();
+  const {addExpense, addIncome, data: storeData} = useExpenseStore((state) => state);
+
+  const handleSelect = (value: number) => {
+      setValue("type", value)
+  }
 
   const onSubmit = (data: FieldValues) => {
-    console.log(data)
+    // addExpense(data)
+    const currentMonth = new Date().getMonth() + 1;
+    
+    if(selectedType === 0) {
+      addExpense({
+        id: 'kalsdjl',
+        amount: parseFloat(data.amount),
+        category: {
+          icon: 'piggy-bank',
+          name: 'test'
+        },
+        date: currentMonth.toString()
+      })
+    } else {
+      addIncome({
+        id: 'kalsjdkla',
+        amount: parseInt(data.amount),
+        incomeName: 'test',
+        icon: 'piggy-bank',
+        date: currentMonth.toString(),
+      })
+    }
+    console.log(storeData)
   }
 
 	return (
@@ -40,7 +68,7 @@ export default () => {
 				<ButtonTitle>Save</ButtonTitle>
 			</ButtonContainer>
      
-				<ExpenseType />
+				<ExpenseType onSelect={handleSelect} />
 			</Card>
 		</Container>
 	);
