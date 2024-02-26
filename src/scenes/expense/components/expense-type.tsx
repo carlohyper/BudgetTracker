@@ -14,6 +14,7 @@ export interface ExpenseType {
 
 export default ({ showModal, selectedCategory }: ExpenseType) => {
   const { expenseType, selectedType, setSelectedType } = useAddExpense();
+
   return (
     <>
       <ExpenseTypeContainer>
@@ -29,6 +30,7 @@ export default ({ showModal, selectedCategory }: ExpenseType) => {
           </ExpenseTypeItem>
         ))}
       </ExpenseTypeContainer>
+
       {selectedType === 0 ? (
         <ExpenseForm
           showModal={showModal}
