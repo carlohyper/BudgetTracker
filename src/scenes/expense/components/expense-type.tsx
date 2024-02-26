@@ -6,8 +6,13 @@ import IncomeForm from "./income-form";
 
 import { useAddExpense } from "../hooks/use-add-expense.hook";
 
-export default () => {
+interface ExpenseTypeProp {
+	onSelect: (index: number) => void;
+}
+
+export default ({onSelect}: ExpenseTypeProp ) => {
 	const { expenseType, selectedType, setSelectedType } = useAddExpense();
+	console.log("FROM TYPE COMPONENT: ", selectedType)
 	return (
 		<>
 			<ExpenseTypeContainer>
@@ -15,7 +20,10 @@ export default () => {
 					<ExpenseTypeItem
 						key={i}
 						state={i === selectedType ? true : false}
-						onPress={() => setSelectedType(i)}>
+						onPress={() => {
+							onSelect(i)
+							setSelectedType(i)
+						}}>
 						<ExpenseTypeItemText state={i === selectedType ? true : false}>
 							{expense.name}
 						</ExpenseTypeItemText>
