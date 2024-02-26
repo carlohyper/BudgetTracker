@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components/native';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 
 import { AddRouteProps } from '@types';
 
 export default function ({ navigation }: AddRouteProps) {
+
   return (
     <Container>
       <ListOptions>
