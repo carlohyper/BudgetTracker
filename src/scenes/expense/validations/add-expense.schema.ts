@@ -1,7 +1,12 @@
-import { z } from 'zod'
+import { z } from "zod";
 
 export const addExepenseSchema = z.object({
-    amount: z.string()
-})
+  amount: z.string(),
+  expenseType: z.string(),
+  category: z.object({
+    name: z.string(),
+    icon: z.string(),
+  }),
+});
 
-export type FieldValues = z.infer<typeof addExepenseSchema>
+export type FieldValues = z.infer<typeof addExepenseSchema>;

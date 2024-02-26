@@ -1,27 +1,36 @@
-import React from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import React from "react";
+import { useNavigation } from "@react-navigation/native";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-import { addExepenseSchema, FieldValues } from '../validations/add-expense.schema';
+import {
+  addExepenseSchema,
+  FieldValues,
+} from "../validations/add-expense.schema";
 
 export const useAddExpense = () => {
   const defaultValues = {
-    amount: '',
-    expenseType: ''
-}
+    amount: "",
+    expenseType: "",
+    category: {
+      name: "",
+      icon: "",
+    },
+  };
+
   const {
     handleSubmit,
     control,
-    formState: { isValid }
-} = useForm<FieldValues>({
+    formState: { isValid },
+    setValue,
+  } = useForm<FieldValues>({
     defaultValues,
-    mode: 'all',
-    resolver: zodResolver(addExepenseSchema)
-})
+    mode: "all",
+    resolver: zodResolver(addExepenseSchema),
+  });
 
-   const [selectedType, setSelectedType] = React.useState(0);
+  const [selectedType, setSelectedType] = React.useState(0);
 
   const expenseType = [
     {
@@ -33,14 +42,15 @@ export const useAddExpense = () => {
       onPress: () => console.log("second"),
     },
   ];
-    const navigation = useNavigation<NativeStackNavigationProp<any>>()
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
-    return {
-        control,
-        expenseType,
-        handleSubmit,
-        navigation,
-        selectedType,
-        setSelectedType
-    }
-}
+  return {
+    control,
+    expenseType,
+    handleSubmit,
+    navigation,
+    selectedType,
+    setSelectedType,
+    setValue,
+  };
+};
