@@ -7,6 +7,7 @@ export const addExepenseSchema = z.object({
     name: z.string(),
     icon: z.string(),
   }),
+  date: z.date()
 });
 
 export type FieldValues = z.infer<typeof addExepenseSchema>;
