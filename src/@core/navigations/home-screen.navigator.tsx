@@ -6,6 +6,7 @@ import { BudgetNavigator } from "./budget.navigator";
 import { AddNavigator } from "./add.navigator";
 import { Button } from "src/components/Button";
 import { CategoryItem } from "@components";
+import { Ionicons } from "@expo/vector-icons";
 
 export type BottomTabParamList = {
   Dashboard: { iconName: string };
@@ -33,7 +34,27 @@ export function HomeScreen() {
   const Stack = createNativeStackNavigator();
 
   return (
-    <Tab.Navigator initialRouteName="Dashboard">
+    <Tab.Navigator
+      initialRouteName="Dashboard"
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName: any;
+
+          if (route.name === "Dashboard") {
+            iconName = focused ? "home" : "home-outline";
+          } else if (route.name === "Add") {
+            iconName = focused ? "add-circle" : "add-circle-outline";
+          } else if (route.name === "Budget") {
+            iconName = focused ? "card" : "card-outline";
+          }
+
+          // You can return any component that you like here!
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: "black",
+        tabBarInactiveTintColor: "gray",
+      })}
+    >
       <Tab.Screen
         name="Dashboard"
         component={Dashboard}
