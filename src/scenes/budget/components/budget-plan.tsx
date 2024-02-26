@@ -3,10 +3,15 @@ import { Alert, Text } from "react-native";
 
 import { ActionContainer, styles } from "../styles/budget-details.style";
 
-import { DynamicCard, DynamicCurrency } from "@components";
+import { CardItem, DynamicCard, DynamicCurrency } from "@components";
+import { iIncome } from "../interfaces";
+import { getTotalAmount } from "@core/helpers";
 
 interface BudgetPlanProps {
-  data: string;
+  data: {
+    income: Array<iIncome>;
+    expenses: Array<iIncome>;
+  };
 }
 
 export const BudgetPlan: React.FC<Partial<BudgetPlanProps>> = ({ data }) => {
@@ -17,28 +22,80 @@ export const BudgetPlan: React.FC<Partial<BudgetPlanProps>> = ({ data }) => {
         showActionIcon={true}
         onPress={() => Alert.alert("Add Income")}
       >
-        <Text>List of Income Here</Text>
+        {data?.income?.map((item, index) => (
+          <CardItem
+            key={index}
+            shape="circle"
+            iconName={item.category.icon}
+            text={item.name}
+            textPosition="right"
+            amount={item.amount}
+          />
+        ))}
       </DynamicCard>
       <DynamicCard
         title="Utilities"
         onPress={() => Alert.alert("Add Utilities")}
-        subLabel={<DynamicCurrency amount="5000" />}
+        subLabel={
+          <DynamicCurrency
+            amount={getTotalAmount(data?.expenses, "utilities")!}
+          />
+        }
       >
-        <Text>List of Utilities Here</Text>
+        {data?.expenses
+          ?.filter((item) => item.category.name === "utilities")
+          .map((item, index) => (
+            <CardItem
+              key={index}
+              shape="circle"
+              iconName={item.category.icon}
+              text={item.name}
+              textPosition="right"
+              amount={item.amount}
+            />
+          ))}
       </DynamicCard>
       <DynamicCard
         title="Savings"
         onPress={() => Alert.alert("Add Savings")}
-        subLabel={<DynamicCurrency amount="2000" />}
+        subLabel={
+          <DynamicCurrency
+            amount={getTotalAmount(data?.expenses, "savings")!}
+          />
+        }
       >
-        <Text>List of Savings Here</Text>
+        {data?.expenses
+          ?.filter((item) => item.category.name === "savings")
+          .map((item, index) => (
+            <CardItem
+              key={index}
+              shape="circle"
+              iconName={item.category.icon}
+              text={item.name}
+              textPosition="right"
+              amount={item.amount}
+            />
+          ))}
       </DynamicCard>
       <DynamicCard
         title="Miscelleneous"
         onPress={() => Alert.alert("Add Miscelleneous")}
-        subLabel={<DynamicCurrency amount="3000" />}
+        subLabel={
+          <DynamicCurrency amount={getTotalAmount(data?.expenses, "misc")!} />
+        }
       >
-        <Text>List of Miscelleneous Here</Text>
+        {data?.expenses
+          ?.filter((item) => item.category.name === "misc")
+          .map((item, index) => (
+            <CardItem
+              key={index}
+              shape="circle"
+              iconName={item.category.icon}
+              text={item.name}
+              textPosition="right"
+              amount={item.amount}
+            />
+          ))}
       </DynamicCard>
     </ActionContainer>
   );

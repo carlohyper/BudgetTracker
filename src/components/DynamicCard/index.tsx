@@ -17,7 +17,7 @@ const CardContainer = styled.View`
   background-color: #fff;
   border-radius: 30px;
   border: 1px solid #eee;
-  width: 90%;
+  width: 100%;
   align-self: center;
 `;
 
@@ -40,6 +40,10 @@ const Divider = styled.View`
   border-color: #eee;
   padding: 1px;
   margin: 10px -20px;
+`;
+
+const CardContent = styled.View`
+  row-gap: 10px;
 `;
 
 const styles = StyleSheet.create({
@@ -84,7 +88,7 @@ export const DynamicCard: React.FC<Partial<CardProps>> = ({
           <Divider />
         </>
       )}
-      {children}
+      <CardContent>{children}</CardContent>
     </CardContainer>
   );
 };
