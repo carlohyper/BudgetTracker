@@ -23,6 +23,7 @@ const CategoryInput = styled.TouchableOpacity`
   border-radius: 12px;
   padding: 12px;
   margin-top: 12px;
+  margin-bottom: 30px;
 `;
 
 const CategoryText = styled.Text`
