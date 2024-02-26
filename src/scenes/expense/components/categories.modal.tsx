@@ -1,9 +1,10 @@
 import React from "react";
 import { View, ScrollView, Modal } from "react-native";
 import { Button } from "src/components/Button";
-import { CategoryItem, IconNames } from "@components";
+import { CategoryItem } from "@components";
 import styled from "styled-components/native";
 import { DynamicCard, Text } from "@components";
+import { IconNames } from "@types";
 
 export type Categories = {
   name: string;

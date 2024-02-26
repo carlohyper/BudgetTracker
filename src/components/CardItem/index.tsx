@@ -11,7 +11,7 @@ import { getTextColor } from "src/@core/helpers/currency-color.helper";
 export interface CardItemProps extends ViewProps {
   text?: string;
   shape?: "circle" | "rounded";
-  iconName?: IconNames;
+  iconName?: IconNames | undefined;
   textPosition?: "right" | "bottom";
   amount?: number;
   actual?: number;
@@ -50,7 +50,7 @@ export const CardItem: React.FC<CardItemProps> = ({
         <IconContainer shape={shape}>
           <MaterialCommunityIcons name={iconName} size={18} />
         </IconContainer>
-        <Text fontSize={14} fontWeight={600}>
+        <Text fontSize={14} fontWeight={600} textTransform={"capitalize"}>
           {text}
         </Text>
       </CategoryWrapper>
