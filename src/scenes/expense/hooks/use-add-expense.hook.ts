@@ -14,6 +14,7 @@ export const useAddExpense = () => {
   const {
     handleSubmit,
     control,
+    setValue,
     formState: { isValid }
 } = useForm<FieldValues>({
     defaultValues,
@@ -41,6 +42,7 @@ export const useAddExpense = () => {
         handleSubmit,
         navigation,
         selectedType,
-        setSelectedType
+        setSelectedType,
+        setValue
     }
 }
