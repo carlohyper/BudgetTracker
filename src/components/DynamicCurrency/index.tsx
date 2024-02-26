@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 interface CurrencyProps {
   icon: any;
-  amount: string;
+  amount: number;
   size: number;
   color: string;
   weight: any;

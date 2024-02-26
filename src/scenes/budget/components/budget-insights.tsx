@@ -36,7 +36,7 @@ export const BudgetInsights: React.FC<Partial<BudgetInsightsProps>> = ({
         onPress={() => Alert.alert("Edit Budget")}
         subLabel={
           <Text>
-            <DynamicCurrency amount="5000" color="#00dd55" />
+            <DynamicCurrency amount={5000} color="#00dd55" />
           </Text>
         }
       >

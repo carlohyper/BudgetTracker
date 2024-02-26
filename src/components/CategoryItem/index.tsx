@@ -4,29 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { ViewProps } from "react-native";
 import { Text } from "../Text";
-
-export type IconNames =
-  | "piggy-bank"
-  | "movie"
-  | "music-note"
-  | "dumbbell"
-  | "gamepad-variant"
-  | "volleyball"
-  | "youtube-subscription"
-  | "wifi"
-  | "lightning-bolt"
-  | "cup-water"
-  | "fire"
-  | "lock-open"
-  | "home-city"
-  | "credit-card-check-outline"
-  | "hanger"
-  | "hand-heart"
-  | "chart-box"
-  | "chart-pie"
-  | "handshake"
-  | "wallet"
-  | "bitcoin";
+import { IconNames } from "@types";
 
 export interface CategoryItemProps extends ViewProps {
   text?: string;

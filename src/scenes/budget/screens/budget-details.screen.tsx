@@ -18,7 +18,7 @@ import { useBudgetDetails } from "../hooks/use-budget-details.hook";
 import { StyledScrollView } from "../styles/budget.style";
 
 export default () => {
-  const { BUTTONS, selectedBtn, setSelectedBtn } = useBudgetDetails();
+  const { BUTTONS, selectedBtn, setSelectedBtn, DATA } = useBudgetDetails();
   return (
     <Layout padding={20}>
       <StyledScrollView>
@@ -42,15 +42,11 @@ export default () => {
               />
               <View>
                 <Text style={styles.label}>Planned Expenses</Text>
-                {/* <Text style={styles.cost}>
-                  <MaterialCommunityIcons
-                    name="currency-php"
-                    style={styles.icon}
-                    size={20}
-                  />
-                  5,000
-                </Text> */}
-                <DynamicCurrency amount="5000" size={20} weight="bold" />
+                <DynamicCurrency
+                  amount={DATA.plannedTotal}
+                  size={20}
+                  weight="bold"
+                />
               </View>
             </PlannedHeader>
             <PlannedAction>
@@ -72,8 +68,10 @@ export default () => {
               ))}
             </PlannedAction>
           </PlannedExpenses>
-          {BUTTONS[selectedBtn].name === "Plan" && <BudgetPlan />}
-          {BUTTONS[selectedBtn].name === "Actual" && <BudgetActual />}
+          {BUTTONS[selectedBtn].name === "Plan" && <BudgetPlan data={DATA} />}
+          {BUTTONS[selectedBtn].name === "Actual" && (
+            <BudgetActual data={DATA} />
+          )}
           {BUTTONS[selectedBtn].name === "Insights" && <BudgetInsights />}
         </DetailContainer>
       </StyledScrollView>
