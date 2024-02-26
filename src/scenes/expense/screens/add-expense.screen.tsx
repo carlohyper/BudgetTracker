@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import { Controller, FieldValues } from "react-hook-form";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -20,6 +20,8 @@ export default () => {
   const [isModalShown, setIsModalShown] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<Categories>();
   const { control, date, handleSubmit, setDate, setValue } = useAddExpense();
+  const [selectedType, setSelectedType] = useState<"expense" | "income">();
+
 
   const onSubmit = (data: FieldValues) => {
     // addExpense(data)
@@ -54,9 +56,15 @@ export default () => {
     setSelectedCategory(value);
   };
 
+  const selectType = (value: "expense" | "income") => {
+    setSelectedType(value);
+  };
+
   return (
     <Container>
       <Card>
+        <CategoriesModal visible={isModalShown} onSelect={selectCategory} />
+
         <AmountContainer>
           <MaterialCommunityIcons name="currency-php" size={18} />
           <Controller
@@ -79,6 +87,7 @@ export default () => {
         <ExpenseType
           showModal={() => setIsModalShown(true)}
           selectedCategory={selectedCategory}
+          selectType={selectType}
         />
 
         <Controller
@@ -99,8 +108,6 @@ export default () => {
       </Card>
 
       <Button onPress={handleSubmit(onSubmit)}>Save</Button>
-
-      <CategoriesModal visible={isModalShown} onSelect={selectCategory} />
     </Container>
   );
 };
@@ -121,6 +128,8 @@ const AmountFieldInput = styled.TextInput`
 const Container = styled.View`
   flex: 1;
   padding: 10px;
+  justify-content: space-between;
+  padding-bottom: 30px;
 `;
 
 const Card = styled.View`
