@@ -11,9 +11,15 @@ export interface ExpenseType {
   showModal: () => void;
   selectedCategory: Categories | undefined;
   selectType: (value: "expense" | "income") => void;
+  control: any;
 }
 
-export default ({ showModal, selectedCategory, selectType }: ExpenseType) => {
+export default ({
+  showModal,
+  selectedCategory,
+  selectType,
+  control,
+}: ExpenseType) => {
   const { expenseType, selectedType, setSelectedType } = useAddExpense();
 
   return (
@@ -39,6 +45,7 @@ export default ({ showModal, selectedCategory, selectType }: ExpenseType) => {
         <ExpenseForm
           showModal={showModal}
           selectedCategory={selectedCategory}
+          control={control}
         />
       ) : (
         <IncomeForm />

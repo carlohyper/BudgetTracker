@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { DateType } from "react-native-ui-datepicker"
+import { DateType } from "react-native-ui-datepicker";
 
 import {
   addExepenseSchema,
@@ -17,8 +17,9 @@ export const useAddExpense = () => {
     category: {
       name: "",
       icon: "",
+      alias: "",
     },
-    date: new Date()
+    date: new Date(),
   };
 
   const {
@@ -33,7 +34,7 @@ export const useAddExpense = () => {
   });
 
   const [selectedType, setSelectedType] = React.useState(0);
-  const [date, setDate] = React.useState<DateType>()
+  const [date, setDate] = React.useState<DateType>();
 
   const expenseType = [
     {

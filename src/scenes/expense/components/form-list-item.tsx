@@ -5,7 +5,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 interface FormListItemProps {
   title: string;
   onPress?: () => void;
-  selectType: (value: "expense" | "income") => void;
+  selectType?: (value: "expense" | "income") => void;
 }
 
 const FormListItem = ({ title, onPress }: FormListItemProps) => {
