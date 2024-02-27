@@ -28,6 +28,8 @@
     "react-native-ui-datepicker": "^2.0.1",
     "styled-components": "^6.1.8",
     "typescript": "^5.3.3",
+    "uuid": "^7.0.0",
+    "uuidv4": "5.0.1",
     "yarn": "^1.22.21",
     "zod": "^3.22.4",
     "zustand": "^4.5.1"
