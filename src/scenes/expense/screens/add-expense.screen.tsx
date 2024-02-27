@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import { Controller, FieldValues } from "react-hook-form";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import DateTimePicker from "react-native-ui-datepicker";
+import uuid  from "uuidv4"
 
 import { Button } from "@components";
 import { useExpenseStore } from "src/stores/expense.store";
@@ -23,8 +24,16 @@ export default () => {
   const [selectedType, setSelectedType] = useState<"expense" | "income">();
 
   const onSubmit = (data: FieldValues) => {
-    // addExpense(data)
-    // const currentMonth = new Date().getMonth() + 1;
+    addExpense({
+      id: uuid(),
+      amount: parseInt(data.amount),
+      category: {
+        icon: data.category.icon,
+        name: data.category.name,
+        alias: data.category.alias
+      },
+      date: data.date
+    })
 
     // if (true) {
     //   addExpense({
@@ -46,7 +55,6 @@ export default () => {
     //   });
     // }
     // console.log(storeData);
-    console.log("YAWA", { ...data, date });
   };
 
   const selectCategory = (value: Categories) => {
