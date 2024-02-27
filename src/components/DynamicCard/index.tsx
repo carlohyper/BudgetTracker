@@ -1,16 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import styled from "styled-components/native";
 import { FontAwesome5 } from "@expo/vector-icons";
-
-interface CardProps {
-  title: string;
-  actionIcon: any;
-  showActionIcon?: boolean;
-  onPress: () => void;
-  subLabel?: string | React.ReactNode;
-  children: string | React.ReactNode;
-  showHeader?: boolean;
-}
+import { getJustify } from "@core/helpers";
 
 const CardContainer = styled.View`
   padding: 20px;
@@ -54,6 +45,17 @@ const styles = StyleSheet.create({
   },
 });
 
+interface CardProps {
+  title: string;
+  actionIcon: any;
+  showActionIcon?: boolean;
+  onPress: () => void;
+  subLabel?: string | React.ReactNode;
+  children: string | React.ReactNode;
+  showHeader?: boolean;
+  headerPosition: "center" | "left" | "right";
+}
+
 export const DynamicCard: React.FC<Partial<CardProps>> = ({
   title = "insert title",
   actionIcon = "plus",
@@ -62,6 +64,7 @@ export const DynamicCard: React.FC<Partial<CardProps>> = ({
   subLabel,
   children,
   showHeader = true,
+  headerPosition,
 }) => {
   const onClick = () => {
     if (typeof onPress === "function") {
@@ -72,8 +75,8 @@ export const DynamicCard: React.FC<Partial<CardProps>> = ({
     <CardContainer>
       {showHeader && (
         <>
-          <CardHeader>
-            <CardTitle>{title}</CardTitle>
+          <CardHeader style={{ justifyContent: getJustify(headerPosition) }}>
+            <CardTitle style={{ textAlign: headerPosition }}>{title}</CardTitle>
             {showActionIcon ? (
               <FontAwesome5
                 onPress={onClick}

@@ -7,6 +7,7 @@ import { AddNavigator } from "./add.navigator";
 import { Button } from "src/components/Button";
 import { CategoryItem } from "@components";
 import { Ionicons } from "@expo/vector-icons";
+import { DashboardScreen } from "@scenes/dashboard";
 
 export type BottomTabParamList = {
   Dashboard: { iconName: string };
@@ -57,7 +58,7 @@ export function HomeScreen() {
     >
       <Tab.Screen
         name="Dashboard"
-        component={Dashboard}
+        component={DashboardScreen}
         initialParams={{ iconName: "book" }}
       />
       <Tab.Screen

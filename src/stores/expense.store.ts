@@ -1,12 +1,13 @@
-
-import { create } from 'zustand';
+import { IconNames } from "@types";
+import { create } from "zustand";
 
 interface ExpenseItem {
   id: string;
   amount: number;
   category: {
-    icon: string;
+    icon: IconNames | undefined;
     name: string;
+    alias?: string;
   };
   date: string;
 }
@@ -30,7 +31,28 @@ interface State {
 
 export const useExpenseStore = create<State>((set) => ({
   data: {
-    expense: [],
+    expense: [
+      {
+        id: "1",
+        amount: 5000,
+        category: {
+          icon: "home-city",
+          name: "Rent",
+          alias: "Rent",
+        },
+        date: "02-22-2024",
+      },
+      {
+        id: "2",
+        amount: 1700,
+        category: {
+          icon: "wifi",
+          name: "Internet",
+          alias: "Internet",
+        },
+        date: "02-23-2024",
+      },
+    ],
     income: [],
   },
   addExpense: (expense) =>

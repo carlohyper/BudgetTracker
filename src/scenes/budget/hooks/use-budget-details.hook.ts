@@ -1,4 +1,3 @@
-import { Categories } from "./../../expense/screens/categories.screen";
 import * as React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Alert } from "react-native";
