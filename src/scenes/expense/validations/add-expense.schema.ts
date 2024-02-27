@@ -6,8 +6,9 @@ export const addExepenseSchema = z.object({
   category: z.object({
     name: z.string(),
     icon: z.string(),
+    alias: z.string(),
   }),
-  date: z.date()
+  date: z.date(),
 });
 
 export type FieldValues = z.infer<typeof addExepenseSchema>;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components/native";
 import { Controller, FieldValues } from "react-hook-form";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import DateTimePicker from 'react-native-ui-datepicker';
+import DateTimePicker from "react-native-ui-datepicker";
 
 import { Button } from "@components";
 import { useExpenseStore } from "src/stores/expense.store";
@@ -21,7 +21,6 @@ export default () => {
   const [selectedCategory, setSelectedCategory] = useState<Categories>();
   const { control, date, handleSubmit, setDate, setValue } = useAddExpense();
   const [selectedType, setSelectedType] = useState<"expense" | "income">();
-
 
   const onSubmit = (data: FieldValues) => {
     // addExpense(data)
@@ -47,12 +46,16 @@ export default () => {
     //   });
     // }
     // console.log(storeData);
-    console.log({...data, date})
+    console.log("YAWA", { ...data, date });
   };
 
   const selectCategory = (value: Categories) => {
     setIsModalShown(false);
-    setValue("category", value);
+    setValue("category", {
+      name: value.name,
+      icon: value.icon,
+      alias: value.name,
+    });
     setSelectedCategory(value);
   };
 
@@ -88,6 +91,7 @@ export default () => {
           showModal={() => setIsModalShown(true)}
           selectedCategory={selectedCategory}
           selectType={selectType}
+          control={control}
         />
 
         <Controller
@@ -95,16 +99,15 @@ export default () => {
           control={control}
           render={({ field }) => (
             <DateTimePicker
-            mode="single"
-            date={date}
-            selectedItemColor="black"
-            onChange={({ date }) => {
-              setDate(date)
-            }}
-          />
+              mode="single"
+              date={date}
+              selectedItemColor="black"
+              onChange={({ date }) => {
+                setDate(date);
+              }}
+            />
           )}
         />
-
       </Card>
 
       <Button onPress={handleSubmit(onSubmit)}>Save</Button>
