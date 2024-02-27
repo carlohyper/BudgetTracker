@@ -1,24 +1,6 @@
 import { IconNames } from "@types";
 import { create } from "zustand";
-
-interface ExpenseItem {
-  id: string;
-  amount: number;
-  category: {
-    icon: IconNames | undefined;
-    name: string;
-    alias?: string;
-  };
-  date: string;
-}
-
-interface IncomeItem {
-  id: string;
-  amount: number;
-  incomeName: string;
-  icon: string;
-  date: string;
-}
+import { ExpenseItem, IncomeItem } from "./interfaces";
 
 interface State {
   data: {
@@ -40,7 +22,7 @@ export const useExpenseStore = create<State>((set) => ({
           name: "Rent",
           alias: "Rent",
         },
-        date: "02-22-2024",
+        date: "2024-01-22T08:47:03.512Z",
       },
       {
         id: "2",
@@ -50,7 +32,17 @@ export const useExpenseStore = create<State>((set) => ({
           name: "Internet",
           alias: "Internet",
         },
-        date: "02-23-2024",
+        date: "2024-02-23T08:47:03.512Z",
+      },
+      {
+        id: "3",
+        amount: 5000,
+        category: {
+          icon: "cup-water",
+          name: "Water",
+          alias: "Water",
+        },
+        date: "2024-02-27T08:47:03.512Z",
       },
     ],
     income: [],

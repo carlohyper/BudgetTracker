@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Alert } from "react-native";
 import { FontAwesome5, MaterialCommunityIcons } from "@expo/vector-icons";
 import { CardItem, DynamicCard, Layout } from "@components";
@@ -8,36 +8,56 @@ import {
   StyledScrollView,
 } from "../styles/dashboard.style";
 import { useExpenseStore } from "src/stores/expense.store";
+import { BarChart } from "react-native-chart-kit";
+import { useDashboard } from "../hooks/dashboard.hook";
+import { CustomGraph } from "../components/custom-chart";
+import { Picker } from "@react-native-picker/picker";
 
 export default () => {
-  const { data } = useExpenseStore((state) => state);
+  const {
+    chartData,
+    chartConfig,
+    screenWidth,
+    graphStyle,
+    monthList,
+    selectedMonth,
+    setSelectedMonth,
+    filteredData,
+    totalData,
+  } = useDashboard();
   return (
     <Layout padding={20}>
       <StyledScrollView>
         <DetailContainer>
-          <MonthSelector>
-            <TouchableOpacity>
-              <FontAwesome5 name="chevron-left" />
-            </TouchableOpacity>
-            <Text>February</Text>
-            <TouchableOpacity>
-              <FontAwesome5 name="chevron-right" />
-            </TouchableOpacity>
-          </MonthSelector>
           <DynamicCard
-            title="Daily Budget"
-            actionIcon="pen"
+            paddingVertical={0}
+            paddingHorizontal={10}
             showHeader={false}
-            onPress={() => Alert.alert("Edit Budget")}
           >
-            <Text>Graph Here</Text>
+            <Picker
+              selectedValue={selectedMonth}
+              onValueChange={(itemValue, itemIndex) =>
+                setSelectedMonth(itemValue)
+              }
+            >
+              {monthList.map((item, index) => (
+                <Picker.Item
+                  key={index}
+                  label={item}
+                  value={item}
+                />
+              ))}
+            </Picker>
+          </DynamicCard>
+          <DynamicCard showHeader={false}>
+            <CustomGraph data={totalData} />
           </DynamicCard>
           <DynamicCard
             title="Expenses"
             actionIcon="pen"
             headerPosition="center"
           >
-            {data.expense?.map((item, index) => (
+            {filteredData?.map((item, index) => (
               <CardItem
                 key={index}
                 shape="circle"
@@ -51,6 +71,13 @@ export default () => {
                 amount={item.amount}
               />
             ))}
+            {!filteredData.length && (
+              <Text
+                style={{ fontSize: 18, textAlign: "center", color: "#8e8e8e" }}
+              >
+                No Data
+              </Text>
+            )}
           </DynamicCard>
         </DetailContainer>
       </StyledScrollView>

@@ -3,8 +3,21 @@ import styled from "styled-components/native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { getJustify } from "@core/helpers";
 
-const CardContainer = styled.View`
-  padding: 20px;
+interface CardContainerProps {
+  paddingVertical?: number;
+  paddingHorizontal?: number;
+}
+
+interface CardHeaderProps {
+  justify?: string;
+  textAlign?: string;
+}
+
+const CardContainer = styled.View<CardContainerProps>`
+  padding-top: ${({ paddingVertical }) => paddingVertical}px;
+  padding-bottom: ${({ paddingVertical }) => paddingVertical}px;
+  padding-left: ${({ paddingHorizontal }) => paddingHorizontal}px;
+  padding-right: ${({ paddingHorizontal }) => paddingHorizontal}px;
   background-color: #fff;
   border-radius: 30px;
   border: 1px solid #eee;
@@ -12,10 +25,10 @@ const CardContainer = styled.View`
   align-self: center;
 `;
 
-const CardHeader = styled.View`
+const CardHeader = styled.View<CardHeaderProps>`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: ${({ justify }) => justify};
   align-items: center;
 `;
 
@@ -54,6 +67,8 @@ interface CardProps {
   children: string | React.ReactNode;
   showHeader?: boolean;
   headerPosition: "center" | "left" | "right";
+  paddingVertical?: number;
+  paddingHorizontal?: number;
 }
 
 export const DynamicCard: React.FC<Partial<CardProps>> = ({
@@ -65,6 +80,8 @@ export const DynamicCard: React.FC<Partial<CardProps>> = ({
   children,
   showHeader = true,
   headerPosition,
+  paddingVertical = 20,
+  paddingHorizontal = 20,
 }) => {
   const onClick = () => {
     if (typeof onPress === "function") {
@@ -72,10 +89,13 @@ export const DynamicCard: React.FC<Partial<CardProps>> = ({
     }
   };
   return (
-    <CardContainer>
+    <CardContainer
+      paddingVertical={paddingVertical}
+      paddingHorizontal={paddingHorizontal}
+    >
       {showHeader && (
         <>
-          <CardHeader style={{ justifyContent: getJustify(headerPosition) }}>
+          <CardHeader justify={getJustify(headerPosition)}>
             <CardTitle style={{ textAlign: headerPosition }}>{title}</CardTitle>
             {showActionIcon ? (
               <FontAwesome5

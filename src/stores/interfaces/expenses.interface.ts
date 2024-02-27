@@ -1,17 +1,17 @@
 import { IconNames } from "@types";
 
-export interface iCategory {
-  icon: IconNames;
-  name: string;
-}
-export interface iIncome {
+export interface ExpenseItem {
   id: string;
-  name: string;
   amount: number;
-  category: iCategory;
+  category: {
+    icon: IconNames | undefined;
+    name: string;
+    alias?: string;
+  };
+  date: string;
 }
 
-export interface ExpenseItem {
+export interface IncomeItem {
   id: string;
   amount: number;
   category: {

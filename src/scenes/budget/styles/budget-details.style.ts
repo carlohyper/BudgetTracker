@@ -59,12 +59,11 @@ export const styles = StyleSheet.create({
     marginRight: 10,
   },
   actionBtnWrapper: {
-    width: "30%",
     flexGrow: 1,
     color: "#000",
   },
   actionBtn: {
-    fontSize: 15,
+    fontSize: 12,
     fontWeight: "600",
     textAlign: "center",
     color: "#000",
