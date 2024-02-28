@@ -1,111 +1,158 @@
-import React from 'react'
-import styled from 'styled-components/native';
-import { Controller } from 'react-hook-form';
+import React from "react";
+import styled from "styled-components/native";
+import { Controller } from "react-hook-form";
 
-import { useAddNewBudgetDetails } from '../hooks/use-add-new-budget-details.hook';
+import { useAddNewBudgetDetails } from "../hooks/use-add-new-budget-details.hook";
+import { CardItem, DynamicCard, Layout } from "@components";
+import { StatusBar, Text } from "react-native";
+import { StyledScrollView } from "../styles/budget.style";
+import { Picker } from "@react-native-picker/picker";
+import { DetailContainer } from "../styles/budget-details.style";
+import { FontAwesome5 } from "@expo/vector-icons";
 
 export default () => {
-    const { handleSubmit, navigation, isValid, control} = useAddNewBudgetDetails()
-    const onSubmit = (data: any) => {
-        console.log(data)
-        navigation.navigate("New Budget Items")
-    }
+  const {
+    handleSubmit,
+    navigation,
+    isValid,
+    control,
+    monthList,
+    onSubmit,
+    openOptionList,
+    data,
+  } = useAddNewBudgetDetails();
   return (
-    <Container>
-        <ContentContainer>
+    <Layout padding={20}>
+      <StyledScrollView>
+        <DetailContainer>
+          <DynamicCard title="Add Details" showActionIcon={false}>
             <Space>
-                <Title>Add Details</Title>
-                <BorderLine />
+              <Label>Month</Label>
+              <Controller
+                control={control}
+                name="title"
+                render={({ field: { onChange, onBlur, value } }) => (
+                  // <TextField
+                  //   value={value}
+                  //   onBlur={onBlur}
+                  //   onChangeText={(text: string) => onChange(text)}
+                  // />
+                  <BorderLine>
+                    <Picker
+                      selectedValue={value}
+                      onValueChange={(itemValue, itemIndex) =>
+                        onChange(itemValue)
+                      }
+                    >
+                      {monthList.map((item, index) => (
+                        <Picker.Item key={index} label={item} value={item} />
+                      ))}
+                    </Picker>
+                  </BorderLine>
+                )}
+              />
+              <Label>{isValid}</Label>
+              <Controller
+                control={control}
+                name="period"
+                render={({ field: { value } }) => <TextField value={value} />}
+              />
             </Space>
-
+          </DynamicCard>
+          <DynamicCard title="Add Items" showActionIcon={false}>
             <Space>
-                <Label>Title</Label>
-                <Controller
-                    control={control}
-                    name="title"
-                    render={({ field: { onChange, onBlur, value}}) => (
-                        <TextField
-                            value={value}
-                            onBlur={onBlur}
-                            onChangeText={(text: string) => onChange(text)}
-                        />
-                    )}
+              <Label>Income</Label>
+              <AddButton onPress={() => openOptionList("income")}>
+                <AddButtonLabel>
+                  <FontAwesome5 name="plus" />
+                  &nbsp; Add
+                </AddButtonLabel>
+              </AddButton>
+            </Space>
+            <Space>
+              <Label>Expenses</Label>
+              {data.tempExpense.map((item, index) => (
+                <CardItem
+                  key={index}
+                  shape="circle"
+                  iconName={item.category.icon}
+                  text={
+                    !!item.category.alias
+                      ? item.category.alias
+                      : item.category.name
+                  }
+                  textPosition="right"
+                  amount={item.amount}
                 />
-                <Label>{isValid}</Label>
+              ))}
+              <AddButton onPress={() => openOptionList("expense")}>
+                <AddButtonLabel>
+                  <FontAwesome5 name="plus" />
+                  &nbsp; Add
+                </AddButtonLabel>
+              </AddButton>
             </Space>
-
-            <Space>
-                <Controller
-                    control={control}
-                    name="period"
-                    render={({ field: {value} }) => (
-                        <TextField value={value} />
-                    )}
-                />
-            </Space>
-        </ContentContainer>
-        
-        <SaveButton disabled={!isValid} onPress={handleSubmit(onSubmit)}>
-            <ButtonTitle>Next</ButtonTitle>
-        </SaveButton>
-    </Container>
-  )
-}
-
-const Container = styled.View`
-    flex: 1;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: #EDEADE;
-`
-
-const ContentContainer = styled.View`
-    width: 90%;
-    border-radius: 20px;
-    background-color: #fff;
-    padding: 20px;
-`
-
+          </DynamicCard>
+          <SaveButton disabled={!isValid} onPress={handleSubmit(onSubmit)}>
+            <ButtonTitle>Save</ButtonTitle>
+          </SaveButton>
+        </DetailContainer>
+      </StyledScrollView>
+    </Layout>
+  );
+};
 const Space = styled.View`
-    margin-bottom: 20px;
-`
+  margin-bottom: 20px;
+`;
 
 const Title = styled.Text`
-    font-weight: 700;
-    font-size: 18px;
-    padding-bottom: 10px;
-`
+  font-weight: 700;
+  font-size: 18px;
+  padding-bottom: 10px;
+`;
 
 const BorderLine = styled.View`
-    border-top-color: #c0c0c0;
-    border-width: 1px;
-`
+  border-color: #ccc;
+  border-radius: 8px;
+  border-width: 2px;
+  font-size: 18px;
+`;
 
 const Label = styled.Text`
-    font-size: 18px;
-    margin-bottom: 5px;
-`
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 5px;
+`;
 
 const TextField = styled.TextInput`
-    borderColor: #ccc;
-    border-radius: 8px;
-    border-width: 2px;
-    padding: 20px;
-    font-size: 18px;
-`
+  border-color: #ccc;
+  border-radius: 8px;
+  border-width: 2px;
+  padding: 14px 16px;
+  font-size: 18px;
+`;
 
 const SaveButton = styled.TouchableOpacity`
-    background-color: #000;
-    width: 90%;
-    padding: 20px;
-    border-radius: 12px;
-`
+  background-color: #000;
+  padding: 15px;
+  border-radius: 12px;
+`;
+
+const AddButton = styled.TouchableOpacity`
+  background-color: #ccc;
+  padding: 12px;
+  border-radius: 12px;
+`;
+
+const AddButtonLabel = styled.Text`
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+`;
 
 const ButtonTitle = styled.Text`
-    color: #fff;
-    font-size: 24px;
-    font-weight: 700;
-    text-align: center;
-`
-
-
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+`;

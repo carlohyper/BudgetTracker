@@ -4,23 +4,11 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Dimensions } from "react-native";
 import { useExpenseStore } from "src/stores/expense.store";
 import { getTotalAmount } from "@core/helpers";
-import { useCallback, useState } from "react";
+import { useState } from "react";
+import { MONTH_LIST } from "@constants";
 
 export const useDashboard = () => {
-  const monthList = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+  const monthList = MONTH_LIST;
 
   const { data } = useExpenseStore((state) => state);
 

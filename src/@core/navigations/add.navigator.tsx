@@ -3,7 +3,11 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { AddStackParamList } from "@types";
 import { AddOptionScreen } from "@scenes/add-option";
-import { AddNewBudgetScreen, NewBudgetItemsScreen } from "@scenes/budget";
+import {
+  AddNewBudgetScreen,
+  ListOptionsScreen,
+  NewBudgetItemsScreen,
+} from "@scenes/budget";
 import { AddExpenseScreen } from "@scenes/expense";
 
 const Stack = createNativeStackNavigator<AddStackParamList>();
@@ -44,6 +48,11 @@ export function AddNavigator() {
         options={{
           headerShown: true,
         }}
+      />
+      <Stack.Screen
+        name="List Options"
+        component={ListOptionsScreen}
+        initialParams={{ optionType: "expense" }}
       />
     </Stack.Navigator>
   );

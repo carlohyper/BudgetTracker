@@ -26,9 +26,13 @@ export type AddStackParamList = {
   "New Budget": undefined;
   "New Wallet": undefined;
   "New Budget Items": undefined;
+  "List Options": {
+    optionType: "income" | "expense";
+  };
 };
 
 export type AddRouteProps = NativeStackScreenProps<
   AddStackParamList,
-  "Add Option"
+  "Add Option",
+  "List Options"
 >;
