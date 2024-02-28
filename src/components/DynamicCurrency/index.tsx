@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Alert, StyleSheet, Text } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { formatCurrency } from "@core/helpers";
 
 interface CurrencyProps {
   icon: any;
@@ -28,7 +29,7 @@ export const DynamicCurrency: React.FC<Partial<CurrencyProps>> = ({
   return (
     <Text style={{ fontSize: size, fontWeight: weight, color }}>
       <MaterialCommunityIcons name={icon} style={styles.icon} size={size} />
-      {amount}
+      {formatCurrency(amount)}
     </Text>
   );
 };

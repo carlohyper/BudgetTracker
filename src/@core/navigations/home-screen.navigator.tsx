@@ -60,11 +60,17 @@ export function HomeScreen() {
         name="Dashboard"
         component={DashboardScreen}
         initialParams={{ iconName: "book" }}
+        options={{
+          headerTitleAlign: "center",
+        }}
       />
       <Tab.Screen
         name="Add"
         component={AddNavigator}
         initialParams={{ iconName: "add-circle" }}
+        options={{
+          headerShown: false,
+        }}
       />
       <Tab.Screen
         name="Budget"
