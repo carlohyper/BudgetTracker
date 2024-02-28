@@ -14,12 +14,14 @@ export function BudgetNavigator() {
   const initialRouteName: keyof BudgetStackParamList = "Budget List";
 
   return (
-    <Stack.Navigator initialRouteName={initialRouteName}>
+    <Stack.Navigator
+      initialRouteName={initialRouteName}
+      screenOptions={{ headerTitleAlign: "center" }}
+    >
       <Stack.Screen
         name="Budget List"
         component={BudgetScreen}
         options={{
-          headerTitleAlign: "center",
           headerTitle: "Budget",
           headerShown: true,
         }}
@@ -28,7 +30,6 @@ export function BudgetNavigator() {
         name="Budget Details"
         component={BudgetDetailsScreen}
         options={{
-          headerTitleAlign: "center",
           headerShown: true,
         }}
       />
