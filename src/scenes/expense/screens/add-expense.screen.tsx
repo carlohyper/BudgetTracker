@@ -20,7 +20,8 @@ export default () => {
 
   const [isModalShown, setIsModalShown] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<Categories>();
-  const { control, date, handleSubmit, setDate, setValue } = useAddExpense();
+  const { control, date, handleSubmit, setDate, setValue, navigation } =
+    useAddExpense();
   const [selectedType, setSelectedType] = useState<"expense" | "income">();
 
   const onSubmit = (data: FieldValues) => {
@@ -46,6 +47,8 @@ export default () => {
       },
       date: data.date,
     });
+
+    navigation.goBack();
   };
 
   const selectCategory = (value: Categories) => {
