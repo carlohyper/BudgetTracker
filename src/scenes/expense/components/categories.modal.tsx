@@ -11,7 +11,7 @@ export type Categories = {
   icon: IconNames;
 };
 
-const ENTERTAINMENT_CATEGORIES: Array<Categories> = [
+const ENTERTAINMENT_CATEGORIES: Categories[] = [
   {
     name: "Cinema",
     icon: "movie",
@@ -38,7 +38,7 @@ const ENTERTAINMENT_CATEGORIES: Array<Categories> = [
   },
 ];
 
-const UTILITIES_CATEGORIES: Array<Categories> = [
+const UTILITIES_CATEGORIES: Categories[] = [
   {
     name: "Wifi",
     icon: "wifi",
@@ -65,7 +65,7 @@ const UTILITIES_CATEGORIES: Array<Categories> = [
   },
 ];
 
-const MISCELLANEOUS: Array<Categories> = [
+const MISCELLANEOUS: Categories[] = [
   {
     name: "Loan",
     icon: "credit-card-check-outline",
