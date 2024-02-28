@@ -22,9 +22,13 @@ export default () => {
   const [selectedCategory, setSelectedCategory] = useState<Categories>();
   const { control, date, handleSubmit, setDate, setValue, navigation } =
     useAddExpense();
-  const [selectedType, setSelectedType] = useState<"expense" | "income">();
+  const [selectedType, setSelectedType] = useState<"expense" | "income">(
+    "expense"
+  );
 
   const onSubmit = (data: FieldValues) => {
+    console.log(selectedType);
+
     if (selectedType === "expense") {
       return addExpense({
         id: uuid(),
