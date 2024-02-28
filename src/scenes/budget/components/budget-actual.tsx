@@ -4,12 +4,12 @@ import { Alert, Text } from "react-native";
 import { ActionContainer } from "../styles/budget-details.style";
 
 import { CardItem, DynamicCard, DynamicCurrency } from "@components";
-import { iIncome } from "../interfaces";
+import { IncomeItem } from "../interfaces";
 
 interface BudgetActualProps {
   data: {
-    income: Array<iIncome>;
-    expenses: Array<iIncome>;
+    income: IncomeItem[];
+    expenses: IncomeItem[];
   };
 }
 
@@ -28,7 +28,9 @@ export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
             key={index}
             shape="circle"
             iconName={item.category.icon}
-            text={item.name}
+            text={
+              item.category.alias ? item.category.alias : item.category.name
+            }
             textPosition="right"
             amount={item.amount}
             actual={31800}
@@ -62,7 +64,9 @@ export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
               key={index}
               shape="circle"
               iconName={item.category.icon}
-              text={item.name}
+              text={
+                item.category.alias ? item.category.alias : item.category.name
+              }
               textPosition="right"
               amount={item.amount}
               actual={900}
@@ -87,7 +91,9 @@ export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
               key={index}
               shape="circle"
               iconName={item.category.icon}
-              text={item.name}
+              text={
+                item.category.alias ? item.category.alias : item.category.name
+              }
               textPosition="right"
               amount={item.amount}
               actual={900}
@@ -112,7 +118,9 @@ export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
               key={index}
               shape="circle"
               iconName={item.category.icon}
-              text={item.name}
+              text={
+                item.category.alias ? item.category.alias : item.category.name
+              }
               textPosition="right"
               amount={item.amount}
               actual={900}

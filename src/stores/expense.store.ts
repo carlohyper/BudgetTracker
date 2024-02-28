@@ -1,9 +1,10 @@
 import { IconNames } from "@types";
 import { create } from "zustand";
-import { ExpenseItem, IncomeItem } from "./interfaces";
+import { BudgetItem, ExpenseItem, IncomeItem } from "./interfaces";
 
 interface State {
   data: {
+    budget: BudgetItem[];
     expense: ExpenseItem[];
     income: IncomeItem[];
   };
@@ -13,6 +14,7 @@ interface State {
 
 export const useExpenseStore = create<State>((set) => ({
   data: {
+    budget: [],
     expense: [
       {
         id: "1",

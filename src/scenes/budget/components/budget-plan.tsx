@@ -4,13 +4,13 @@ import { Alert, Text } from "react-native";
 import { ActionContainer, styles } from "../styles/budget-details.style";
 
 import { CardItem, DynamicCard, DynamicCurrency } from "@components";
-import { iIncome } from "../interfaces";
+import { IncomeItem } from "../interfaces";
 import { getTotalAmount } from "@core/helpers";
 
 interface BudgetPlanProps {
   data: {
-    income: Array<iIncome>;
-    expenses: Array<iIncome>;
+    income: IncomeItem[];
+    expenses: IncomeItem[];
   };
 }
 
@@ -27,7 +27,9 @@ export const BudgetPlan: React.FC<Partial<BudgetPlanProps>> = ({ data }) => {
             key={index}
             shape="circle"
             iconName={item.category.icon}
-            text={item.name}
+            text={
+              item.category.alias ? item.category.alias : item.category.name
+            }
             textPosition="right"
             amount={item.amount}
           />
@@ -49,7 +51,9 @@ export const BudgetPlan: React.FC<Partial<BudgetPlanProps>> = ({ data }) => {
               key={index}
               shape="circle"
               iconName={item.category.icon}
-              text={item.name}
+              text={
+                item.category.alias ? item.category.alias : item.category.name
+              }
               textPosition="right"
               amount={item.amount}
             />
@@ -71,7 +75,9 @@ export const BudgetPlan: React.FC<Partial<BudgetPlanProps>> = ({ data }) => {
               key={index}
               shape="circle"
               iconName={item.category.icon}
-              text={item.name}
+              text={
+                item.category.alias ? item.category.alias : item.category.name
+              }
               textPosition="right"
               amount={item.amount}
             />
@@ -91,7 +97,9 @@ export const BudgetPlan: React.FC<Partial<BudgetPlanProps>> = ({ data }) => {
               key={index}
               shape="circle"
               iconName={item.category.icon}
-              text={item.name}
+              text={
+                item.category.alias ? item.category.alias : item.category.name
+              }
               textPosition="right"
               amount={item.amount}
             />

@@ -1,87 +1,95 @@
 import * as React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Alert } from "react-native";
-import { iIncome } from "../interfaces";
+import { ExpenseItem, IncomeItem } from "../interfaces";
 
 export const useBudgetDetails = () => {
   const navigation = useNavigation();
   const [selectedBtn, setSelectedBtn] = React.useState(0);
 
-  const INCOME: Array<iIncome> = [
+  const INCOME: IncomeItem[] = [
     {
       id: "1",
-      name: "Income",
       amount: 30000,
       category: {
         icon: "credit-card-check-outline",
         name: "income",
+        alias: "Income",
       },
+      date: "2024-01-22T08:47:03.512Z",
     },
   ];
 
-  const EXPENSES: Array<iIncome> = [
+  const EXPENSES: ExpenseItem[] = [
     {
       id: "1",
-      name: "Rent",
       amount: 5000,
       category: {
         icon: "home-city",
         name: "utilities",
+        alias: "Rent",
       },
+      date: "2024-01-22T08:47:03.512Z",
     },
     {
       id: "2",
-      name: "Internet",
       amount: 1700,
       category: {
         icon: "wifi",
         name: "utilities",
+        alias: "Internet",
       },
+      date: "2024-01-22T08:47:03.512Z",
     },
     {
       id: "3",
-      name: "Energies",
       amount: 2500,
       category: {
         icon: "lightning-bolt",
         name: "utilities",
+        alias: "Energies",
       },
+      date: "2024-01-22T08:47:03.512Z",
     },
     {
       id: "4",
-      name: "Water",
       amount: 500,
       category: {
         icon: "cup-water",
         name: "utilities",
+        alias: "Water",
       },
+      date: "2024-01-22T08:47:03.512Z",
     },
     {
       id: "5",
-      name: "Rainy Days",
       amount: 1000,
       category: {
         icon: "hanger",
         name: "savings",
+        alias: "Rainy Days",
       },
+      date: "2024-01-22T08:47:03.512Z",
     },
     {
       id: "6",
-      name: "Loans",
       amount: 2000,
       category: {
         icon: "chart-box",
         name: "misc",
+        alias: "Loans",
       },
+      date: "2024-01-22T08:47:03.512Z",
     },
     {
       id: "7",
-      name: "Debt",
       amount: 1000,
       category: {
         icon: "handshake",
         name: "misc",
+        alias: "Debt",
       },
+      date: "2024-01-22T08:47:03.512Z",
     },
   ];
 
