@@ -126,6 +126,7 @@ export default () => {
                   }
                   textPosition="right"
                   amount={item.amount}
+                  color="#F5DD61"
                 />
               ))}
               {!incomeData.length && (

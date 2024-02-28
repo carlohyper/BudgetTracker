@@ -7,6 +7,7 @@ import { Text } from "../Text";
 import { IconNames } from "@types";
 import { DynamicCurrency } from "../DynamicCurrency";
 import { getTextColor } from "src/@core/helpers/currency-color.helper";
+import { CategoryItem } from "../CategoryItem";
 
 export interface CardItemProps extends ViewProps {
   text?: string;
@@ -16,6 +17,7 @@ export interface CardItemProps extends ViewProps {
   amount?: number;
   actual?: number;
   isExpenses?: boolean;
+  color?: string;
 }
 
 export const CardItem: React.FC<CardItemProps> = ({
@@ -26,6 +28,7 @@ export const CardItem: React.FC<CardItemProps> = ({
   amount,
   actual,
   isExpenses = true,
+  color,
 }) => {
   let result = "";
 
@@ -47,12 +50,13 @@ export const CardItem: React.FC<CardItemProps> = ({
   return (
     <Container textPosition={textPosition}>
       <CategoryWrapper>
-        <IconContainer shape={shape}>
-          <MaterialCommunityIcons name={iconName} size={18} />
-        </IconContainer>
-        <Text fontSize={14} fontWeight={600} textTransform={"capitalize"}>
-          {text}
-        </Text>
+        <CategoryItem
+          iconName={iconName}
+          text={text}
+          fontSize={14}
+          color={color}
+          isDisabled={true}
+        />
       </CategoryWrapper>
       <Text>
         {amount && <DynamicCurrency amount={amount} />}
@@ -76,16 +80,6 @@ const Container = styled.View`
   align-items: center;
   gap: 20px;
   justify-content: space-between;
-`;
-
-const IconContainer = styled.View`
-  border-radius: ${({ shape }: CardItemProps) =>
-    shape === "circle" ? 50 : 10}px;
-  background-color: #8e7ab5;
-  justify-content: center;
-  align-items: center;
-  width: 46px;
-  height: 46px;
 `;
 
 const CategoryWrapper = styled.View`
