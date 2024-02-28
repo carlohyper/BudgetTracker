@@ -20,6 +20,7 @@ export const useAddExpense = () => {
       alias: "",
     },
     date: new Date(),
+    title: "",
   };
 
   const {
