@@ -60,6 +60,12 @@ export const useDashboard = () => {
     return selectedMonth === month;
   });
 
+  const incomeData = data.income.filter((item) => {
+    const date = new Date(item.date);
+    const month = monthList[date.getMonth()];
+    return selectedMonth === month;
+  });
+
   const totalData = {
     income: 30000,
     expenses: getTotalAmount(filteredData),
@@ -75,6 +81,7 @@ export const useDashboard = () => {
     selectedMonth,
     setSelectedMonth,
     filteredData,
+    incomeData,
     totalData,
   };
 };

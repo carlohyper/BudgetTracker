@@ -48,7 +48,7 @@ export default ({
           control={control}
         />
       ) : (
-        <IncomeForm />
+        <IncomeForm control={control} />
       )}
     </>
   );

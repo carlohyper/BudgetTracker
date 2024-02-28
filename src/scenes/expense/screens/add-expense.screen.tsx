@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 import { Controller, FieldValues } from "react-hook-form";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import DateTimePicker from "react-native-ui-datepicker";
-import uuid  from "uuidv4"
+import uuid from "uuidv4";
 
 import { Button } from "@components";
 import { useExpenseStore } from "src/stores/expense.store";
@@ -24,37 +24,28 @@ export default () => {
   const [selectedType, setSelectedType] = useState<"expense" | "income">();
 
   const onSubmit = (data: FieldValues) => {
-    addExpense({
+    if (selectedType === "expense") {
+      return addExpense({
+        id: uuid(),
+        amount: parseInt(data.amount),
+        category: {
+          icon: data.category.icon,
+          name: data.category.name,
+          alias: data.category.alias,
+        },
+        date: data.date,
+      });
+    }
+    addIncome({
       id: uuid(),
       amount: parseInt(data.amount),
       category: {
-        icon: data.category.icon,
-        name: data.category.name,
-        alias: data.category.alias
+        icon: "wallet",
+        name: "Salary",
+        alias: data.title,
       },
-      date: data.date
-    })
-
-    // if (true) {
-    //   addExpense({
-    //     id: "kalsdjl",
-    //     amount: parseFloat(data.amount),
-    //     category: {
-    //       icon: "piggy-bank",
-    //       name: "test",
-    //     },
-    //     date: currentMonth.toString(),
-    //   });
-    // } else {
-    //   addIncome({
-    //     id: "kalsjdkla",
-    //     amount: parseInt(data.amount),
-    //     incomeName: "test",
-    //     icon: "piggy-bank",
-    //     date: currentMonth.toString(),
-    //   });
-    // }
-    // console.log(storeData);
+      date: data.date,
+    });
   };
 
   const selectCategory = (value: Categories) => {
