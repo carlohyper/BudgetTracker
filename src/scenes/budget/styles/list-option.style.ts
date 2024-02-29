@@ -29,8 +29,13 @@ export const ListOptionLabel = styled.Text`
   text-align: center;
 `;
 
-export const AddButton = styled.TouchableOpacity`
-  background-color: #000;
+interface AddButtonProps {
+  disabled?: boolean;
+}
+
+export const AddButton = styled.Pressable<AddButtonProps>`
+  /* background-color: #000; */
+  background-color: ${({ disabled }) => (disabled ? "#ccc" : "#000")};
   padding: 12px;
   border-radius: 12px;
 `;

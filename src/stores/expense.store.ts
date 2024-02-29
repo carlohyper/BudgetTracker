@@ -51,7 +51,18 @@ export const useExpenseStore = create<State>((set) => ({
         date: "2024-02-27T08:47:03.512Z",
       },
     ],
-    income: [],
+    income: [
+      {
+        id: "1",
+        amount: 30000,
+        category: {
+          icon: "credit-card-check-outline",
+          name: "Income",
+          alias: "",
+        },
+        date: "2024-01-22T08:47:03.512Z",
+      },
+    ],
     tempExpense: [],
     tempIncome: [],
   },

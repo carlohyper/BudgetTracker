@@ -62,6 +62,20 @@ export default () => {
           <DynamicCard title="Add Items" showActionIcon={false}>
             <Space>
               <Label>Income</Label>
+              {data.tempIncome.map((item, index) => (
+                <CardItem
+                  key={index}
+                  shape="circle"
+                  iconName={item.category.icon}
+                  text={
+                    !!item.category.alias
+                      ? item.category.alias
+                      : item.category.name
+                  }
+                  textPosition="right"
+                  amount={item.amount}
+                />
+              ))}
               <AddButton onPress={() => openOptionList("income")}>
                 <AddButtonLabel>
                   <FontAwesome5 name="plus" />
