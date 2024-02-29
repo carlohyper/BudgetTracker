@@ -14,6 +14,7 @@ interface State {
   addIncome: (income: IncomeItem) => void;
   addTempExpense: (expense: ExpenseItem[]) => void;
   addTempIncome: (income: IncomeItem[]) => void;
+  addBudget: (budget: BudgetItem) => void;
 }
 
 export const useExpenseStore = create<State>((set) => ({
@@ -94,4 +95,10 @@ export const useExpenseStore = create<State>((set) => ({
         tempIncome: [...state.data.tempIncome, ...income],
       },
     })),
+    addBudget: (budget) => set((state) => ({
+      data: {
+        ...state.data,
+        budget: [...state.data.budget, budget]
+      }
+    }))
 }));
