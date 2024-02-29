@@ -6,7 +6,8 @@ import { DynamicCurrency, Layout } from "@components";
 import { BudgetPlan, BudgetActual, BudgetInsights } from "../components";
 import {
   ActionContainer,
-  DateSelector,
+  BudgetHeader,
+  BudgetHeaderText,
   DetailContainer,
   PlannedAction,
   PlannedExpenses,
@@ -18,20 +19,21 @@ import { useBudgetDetails } from "../hooks/use-budget-details.hook";
 import { StyledScrollView } from "../styles/budget.style";
 
 export default () => {
-  const { BUTTONS, selectedBtn, setSelectedBtn, DATA } = useBudgetDetails();
+  const {
+    BUTTONS,
+    selectedBtn,
+    setSelectedBtn,
+    DATA,
+    filteredData,
+    plannedTotal,
+  } = useBudgetDetails();
   return (
     <Layout padding={20}>
       <StyledScrollView>
         <DetailContainer>
-          <DateSelector>
-            <TouchableOpacity>
-              <FontAwesome5 name="chevron-left" />
-            </TouchableOpacity>
-            <Text>1 Dec - 31 Dec</Text>
-            <TouchableOpacity>
-              <FontAwesome5 name="chevron-right" />
-            </TouchableOpacity>
-          </DateSelector>
+          <BudgetHeader>
+            <BudgetHeaderText>{filteredData.title}</BudgetHeaderText>
+          </BudgetHeader>
           <PlannedExpenses>
             <PlannedHeader>
               {/* <FontAwesome5 name="chart-pie" style={styles.icon} size={45} /> */}
@@ -43,7 +45,7 @@ export default () => {
               <View>
                 <Text style={styles.label}>Planned Expenses</Text>
                 <DynamicCurrency
-                  amount={DATA.plannedTotal}
+                  amount={plannedTotal}
                   size={20}
                   weight="bold"
                 />
@@ -68,9 +70,11 @@ export default () => {
               ))}
             </PlannedAction>
           </PlannedExpenses>
-          {BUTTONS[selectedBtn].name === "Plan" && <BudgetPlan data={DATA} />}
+          {BUTTONS[selectedBtn].name === "Plan" && (
+            <BudgetPlan budget={filteredData} />
+          )}
           {BUTTONS[selectedBtn].name === "Actual" && (
-            <BudgetActual data={DATA} />
+            <BudgetActual budget={filteredData} />
           )}
           {BUTTONS[selectedBtn].name === "Insights" && <BudgetInsights />}
         </DetailContainer>

@@ -1,10 +1,11 @@
 import * as React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useExpenseStore } from "src/stores/expense.store";
 
 export const useBudget = () => {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
-
+  const { data } = useExpenseStore((state) => state);
   const DATA = [
     {
       id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
@@ -26,7 +27,15 @@ export const useBudget = () => {
     },
   ];
 
+  const navigateTo = (id: any) => {
+    navigation.navigate("Budget Details", { budgetId: id });
+  };
+
+  const budgetList = data.budget;
+
   return {
     DATA,
+    budgetList,
+    navigateTo,
   };
 };

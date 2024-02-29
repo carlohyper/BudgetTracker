@@ -1,11 +1,22 @@
 import * as React from "react";
-import { useNavigation } from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { Alert } from "react-native";
 import { ExpenseItem, IncomeItem } from "../interfaces";
+import { BudgetStackParamList } from "@types";
+import { useExpenseStore } from "src/stores/expense.store";
+import { getTotalAmount, getCategory } from "@core/helpers";
 
 export const useBudgetDetails = () => {
   const navigation = useNavigation();
   const [selectedBtn, setSelectedBtn] = React.useState(0);
+  const route = useRoute<RouteProp<BudgetStackParamList, "Budget Details">>();
+  const { budgetId } = route.params;
+
+  const { data } = useExpenseStore((state) => state);
+
+  const filteredData = data.budget.filter((item) => item.id === budgetId)[0];
+
+  const plannedTotal = getTotalAmount(filteredData?.data.expense);
 
   const INCOME: IncomeItem[] = [
     {
@@ -121,5 +132,8 @@ export const useBudgetDetails = () => {
     selectedBtn,
     setSelectedBtn,
     DATA,
+    filteredData,
+    plannedTotal,
+    getCategory,
   };
 };

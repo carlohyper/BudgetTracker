@@ -1,6 +1,11 @@
 import { StyleSheet } from "react-native";
 import styled from "styled-components/native";
 
+export const DetailContainer = styled.View`
+  flex-direction: column;
+  flex-grow: 1;
+`;
+
 export const ListContainer = styled.View`
   display: flex;
   flex-direction: column;
@@ -9,7 +14,6 @@ export const ListContainer = styled.View`
 `;
 
 export const ListItem = styled.View`
-  flex: 1;
   padding: 25px;
   background-color: #fff;
   border-radius: 30px;

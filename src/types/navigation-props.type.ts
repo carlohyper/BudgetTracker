@@ -10,14 +10,17 @@ export type RootStackParamList = {
 
 export type BudgetStackParamList = {
   "Budget List": undefined;
-  "Budget Details": undefined;
+  "Budget Details": {
+    budgetId: string | number;
+  };
 };
 
 export type Props = NativeStackScreenProps<RootStackParamList, "Welcome">;
 
 export type BudgetRouteProps = NativeStackScreenProps<
   BudgetStackParamList,
-  "Budget List"
+  "Budget List",
+  "Budget Details"
 >;
 
 export type AddStackParamList = {

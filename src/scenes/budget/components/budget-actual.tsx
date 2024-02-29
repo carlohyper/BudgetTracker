@@ -5,17 +5,18 @@ import { ActionContainer } from "../styles/budget-details.style";
 
 import { CardItem, DynamicCard, DynamicCurrency } from "@components";
 import { IncomeItem } from "../interfaces";
+import { BudgetItem } from "src/stores/interfaces";
+import { useBudgetDetails } from "../hooks/use-budget-details.hook";
+import { getTotalAmount } from "@core/helpers";
 
 interface BudgetActualProps {
-  data: {
-    income: IncomeItem[];
-    expenses: IncomeItem[];
-  };
+  budget: BudgetItem;
 }
 
 export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
-  data,
+  budget,
 }) => {
+  const { getCategory } = useBudgetDetails();
   return (
     <ActionContainer>
       <DynamicCard
@@ -23,7 +24,7 @@ export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
         showActionIcon={true}
         onPress={() => Alert.alert("Add Income")}
       >
-        {data?.income?.map((item, index) => (
+        {budget?.data.income?.map((item, index) => (
           <CardItem
             key={index}
             shape="circle"
@@ -39,26 +40,20 @@ export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
         ))}
       </DynamicCard>
       <DynamicCard
-        title="Utilities"
-        onPress={() => Alert.alert("Add Utilities")}
+        title="Savings"
+        onPress={() => Alert.alert("Add Savings")}
         subLabel={
           <Text>
-            <DynamicCurrency amount={5000} />
+            <DynamicCurrency
+              amount={getTotalAmount(budget?.data.expense, "savings")}
+            />
             &nbsp; / &nbsp;
-            <DynamicCurrency amount={4800} color="#00dd55" size={12} />
+            <DynamicCurrency amount={2000} color="#AAAAAA" size={12} />
           </Text>
         }
       >
-        <CardItem
-          shape="circle"
-          iconName="wifi"
-          text="Wifi"
-          textPosition="right"
-          amount={1000}
-          actual={900}
-        />
-        {data?.expenses
-          ?.filter((item) => item.category.name === "utilities")
+        {budget?.data.expense
+          ?.filter((item) => getCategory(item.category.name) === "savings")
           .map((item, index) => (
             <CardItem
               key={index}
@@ -74,18 +69,51 @@ export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
           ))}
       </DynamicCard>
       <DynamicCard
-        title="Savings"
-        onPress={() => Alert.alert("Add Savings")}
+        title="Utilities"
+        onPress={() => Alert.alert("Add Utilities")}
         subLabel={
           <Text>
-            <DynamicCurrency amount={2000} />
+            <DynamicCurrency
+              amount={getTotalAmount(budget?.data.expense, "utilities")}
+            />
             &nbsp; / &nbsp;
-            <DynamicCurrency amount={2000} color="#AAAAAA" size={12} />
+            <DynamicCurrency amount={4800} color="#00dd55" size={12} />
           </Text>
         }
       >
-        {data?.expenses
-          ?.filter((item) => item.category.name === "savings")
+        {budget?.data.expense
+          ?.filter((item) => getCategory(item.category.name) === "utilities")
+          .map((item, index) => (
+            <CardItem
+              key={index}
+              shape="circle"
+              iconName={item.category.icon}
+              text={
+                item.category.alias ? item.category.alias : item.category.name
+              }
+              textPosition="right"
+              amount={item.amount}
+              actual={900}
+            />
+          ))}
+      </DynamicCard>
+      <DynamicCard
+        title="Entertainment"
+        onPress={() => Alert.alert("Add Entertainment")}
+        subLabel={
+          <Text>
+            <DynamicCurrency
+              amount={getTotalAmount(budget?.data.expense, "entertainment")}
+            />
+            &nbsp; / &nbsp;
+            <DynamicCurrency amount={4800} color="#00dd55" size={12} />
+          </Text>
+        }
+      >
+        {budget?.data.expense
+          ?.filter(
+            (item) => getCategory(item.category.name) === "entertainment"
+          )
           .map((item, index) => (
             <CardItem
               key={index}
@@ -105,14 +133,16 @@ export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
         onPress={() => Alert.alert("Add Miscelleneous")}
         subLabel={
           <Text>
-            <DynamicCurrency amount={3000} />
+            <DynamicCurrency
+              amount={getTotalAmount(budget?.data.expense, "misc")}
+            />
             &nbsp; / &nbsp;
             <DynamicCurrency amount={4000} color="#FF0000" size={12} />
           </Text>
         }
       >
-        {data?.expenses
-          ?.filter((item) => item.category.name === "misc")
+        {budget?.data.expense
+          ?.filter((item) => getCategory(item.category.name) === "misc")
           .map((item, index) => (
             <CardItem
               key={index}

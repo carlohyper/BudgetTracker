@@ -80,6 +80,13 @@ const MISCELLANEOUS: Categories[] = [
   },
 ];
 
+const SAVINGS: Categories[] = [
+  {
+    name: "Savings",
+    icon: "credit-card-check-outline",
+  },
+];
+
 export default function CategoriesModal({
   visible,
   onSelect,
