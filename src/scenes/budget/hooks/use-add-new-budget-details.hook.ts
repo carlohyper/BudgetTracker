@@ -15,7 +15,7 @@ import { useExpenseStore } from "src/stores/expense.store";
 export const useAddNewBudgetDetails = () => {
   const monthList = MONTH_LIST;
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
-  const { data } = useExpenseStore((state) => state);
+  const { data, addBudget } = useExpenseStore((state) => state);
 
   const defaultValues = {
     title: monthList[new Date().getMonth()],
@@ -36,9 +36,14 @@ export const useAddNewBudgetDetails = () => {
     resolver: zodResolver(addNewBudgetDetailsSchema),
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-    navigation.navigate("New Budget Items");
+  const onSubmit = (formData: any) => {
+    const form = { ...formData };
+    form.data = {
+      ...formData,
+      income: [...data.tempIncome],
+      expense: [...data.tempExpense],
+    };
+    addBudget(form.data)
   };
 
   const openOptionList = (type: "income" | "expense") => {
