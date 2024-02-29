@@ -55,7 +55,7 @@ export const useDashboard = () => {
   });
 
   const totalData = {
-    income: 30000,
+    income: getTotalAmount(incomeData),
     expenses: getTotalAmount(filteredData),
   };
 
