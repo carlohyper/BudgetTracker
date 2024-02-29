@@ -40,10 +40,17 @@ export const useAddNewBudgetDetails = () => {
     const form = { ...formData };
     form.data = {
       ...formData,
-      income: [...data.tempIncome],
-      expense: [...data.tempExpense],
+      data: {
+        income: [...data.tempIncome],
+        expense: [...data.tempExpense],
+      },
     };
-    addBudget(form.data)
+    addBudget(form.data);
+    navigation.navigate("Budget");
+    // navigation.navigate("Budget", {
+    //   screen: "Budget Details",
+    //   params: { budgetId: "1" },
+    // });
   };
 
   const openOptionList = (type: "income" | "expense") => {

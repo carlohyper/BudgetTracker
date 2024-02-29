@@ -96,6 +96,6 @@ export const MISCELLANEOUS: Categories[] = [
 export const SAVINGS: Categories[] = [
   {
     name: "Savings",
-    icon: "credit-card-check-outline",
+    icon: "piggy-bank",
   },
 ];

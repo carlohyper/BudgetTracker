@@ -14,7 +14,7 @@ import {
 } from "../styles/budget.style";
 
 export default () => {
-  const { budgetList, navigateTo } = useBudget();
+  const { budgetList, navigateTo, navigateToBudgetDetails } = useBudget();
   return (
     <Layout padding={20}>
       <StyledScrollView>
@@ -27,7 +27,9 @@ export default () => {
                     <Text style={styles.title}>{item.title}</Text>
                     <Text style={styles.period}>{item.period} Budget</Text>
                   </View>
-                  <TouchableOpacity onPress={() => navigateTo(item.id)}>
+                  <TouchableOpacity
+                    onPress={() => navigateToBudgetDetails(item.id)}
+                  >
                     <FontAwesome5 style={styles.icon} name="chevron-right" />
                   </TouchableOpacity>
                 </ListItem>
@@ -38,7 +40,7 @@ export default () => {
           </ListContainer>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => Alert.alert("Simple Button pressed")}
+            onPress={() => navigateTo("New Budget")}
           >
             <Text style={styles.btnText}>Add Budget</Text>
           </TouchableOpacity>

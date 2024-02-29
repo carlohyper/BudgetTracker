@@ -27,8 +27,11 @@ export const useBudget = () => {
     },
   ];
 
-  const navigateTo = (id: any) => {
+  const navigateToBudgetDetails = (id: any) => {
     navigation.navigate("Budget Details", { budgetId: id });
+  };
+  const navigateTo = (route: string) => {
+    navigation.navigate(route);
   };
 
   const budgetList = data.budget;
@@ -37,5 +40,6 @@ export const useBudget = () => {
     DATA,
     budgetList,
     navigateTo,
+    navigateToBudgetDetails,
   };
 };

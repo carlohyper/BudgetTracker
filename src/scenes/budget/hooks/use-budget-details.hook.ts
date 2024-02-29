@@ -16,7 +16,6 @@ export const useBudgetDetails = () => {
   const { data } = useExpenseStore((state) => state);
 
   const filteredData = data.budget.filter((item) => item.id === budgetId)[0];
-  const expenses = data.expense;
 
   const expenseData = data.expense.filter((item) => {
     const date = new Date(item.date);
