@@ -30,8 +30,6 @@ export const useBudgetDetails = () => {
     return filteredData.title === month;
   });
 
-  console.log("expenseData", expenseData);
-
   const income = incomeData.filter(
     (item) => getCategory(item.category.name) === "income"
   );
@@ -50,21 +48,15 @@ export const useBudgetDetails = () => {
 
   const getIncomeAmount = (name: string) => {
     const income = incomeData.filter((item) => item.category.name === name);
-    console.log("name", name);
-    console.log("incomeData", incomeData);
-    console.log("income", income);
     if (income.length) return income[0].amount;
     return 0;
   };
 
   const getExpenseAmount = (name: string) => {
     const expense = expenseData.filter((item) => item.category.name === name);
-    console.log("expense", expense);
     if (expense.length) return expense[0].amount;
     return 0;
   };
-
-  // console.log(expenses);
 
   const plannedTotal = getTotalAmount(filteredData?.data.expense);
 
