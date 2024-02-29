@@ -43,7 +43,8 @@ export const useAddNewBudgetDetails = () => {
       income: [...data.tempIncome],
       expense: [...data.tempExpense],
     };
-    addBudget(form.data)
+    console.log(form.data)
+    // addBudget(form.data)
   };
 
   const openOptionList = (type: "income" | "expense") => {

@@ -6,10 +6,14 @@ import DateTimePicker from "react-native-ui-datepicker";
 import uuid from "uuidv4";
 
 import { Button } from "@components";
+import Form from "src/components/Forms/form";
+import FormInput from "src/components/Forms/form-input";
+import FormButton from "src/components/Forms/form-button";
 import { useExpenseStore } from "src/stores/expense.store";
 import { ExpenseType } from "../components";
 import { useAddExpense } from "../hooks/use-add-expense.hook";
 import CategoriesModal, { Categories } from "../components/categories.modal";
+import { addExepenseSchema } from "../validations/add-expense.schema";
 
 export default () => {
   const {
@@ -27,28 +31,29 @@ export default () => {
   );
 
   const onSubmit = (data: FieldValues) => {
-    if (selectedType === "expense") {
-      return addExpense({
-        id: uuid(),
-        amount: parseInt(data.amount),
-        category: {
-          icon: data.category.icon,
-          name: data.category.name,
-          alias: data.category.alias,
-        },
-        date: data.date,
-      });
-    }
-    addIncome({
-      id: uuid(),
-      amount: parseInt(data.amount),
-      category: {
-        icon: "wallet",
-        name: "Salary",
-        alias: data.title,
-      },
-      date: data.date,
-    });
+    console.log(data)
+    // if (selectedType === "expense") {
+    //   return addExpense({
+    //     id: uuid(),
+    //     amount: parseInt(data.amount),
+    //     category: {
+    //       icon: data.category.icon,
+    //       name: data.category.name,
+    //       alias: data.category.alias,
+    //     },
+    //     date: data.date,
+    //   });
+    // }
+    // addIncome({
+    //   id: uuid(),
+    //   amount: parseInt(data.amount),
+    //   category: {
+    //     icon: "wallet",
+    //     name: "Salary",
+    //     alias: data.title,
+    //   },
+    //   date: data.date,
+    // });
 
     navigation.goBack();
   };
@@ -70,8 +75,11 @@ export default () => {
   return (
     <Container>
       <Card>
-        <CategoriesModal visible={isModalShown} onSelect={selectCategory} />
-
+        <Form valdiationSchema={addExepenseSchema}>
+          <FormInput name="amount" control={control} />
+        </Form>
+        {/* <CategoriesModal visible={isModalShown} onSelect={selectCategory} />
+        <FormInput name="amount" label="Amount" />
         <AmountContainer>
           <MaterialCommunityIcons name="currency-php" size={18} />
           <Controller
@@ -111,7 +119,7 @@ export default () => {
               }}
             />
           )}
-        />
+        /> */}
       </Card>
 
       <Button onPress={handleSubmit(onSubmit)}>Save</Button>
