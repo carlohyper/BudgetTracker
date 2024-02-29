@@ -37,8 +37,6 @@ export const useExpenseStore = create<State>((set) => ({
               date: "2024-01-22T08:47:03.512Z",
             },
           ],
-          name: "Gym",
-          icon: "dumbbell",
           expense: [
             {
               id: "1",

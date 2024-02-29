@@ -2,7 +2,7 @@ import * as React from "react";
 import { Alert, Text, View } from "react-native";
 
 import { CardItem, DynamicCard, DynamicCurrency } from "@components";
-import { getTotalAmount } from "@core/helpers";
+import { getCurrencyStatus, getTextColor, getTotalAmount } from "@core/helpers";
 import styled from "styled-components/native";
 
 interface CustomGraphProps {
@@ -47,7 +47,12 @@ export const CustomGraph: React.FC<Partial<CustomGraphProps>> = ({ data }) => {
         <ItemLabel>Expense</ItemLabel>
       </ItemWrapper>
       <ItemWrapper>
-        <DynamicCurrency amount={left} size={15} weight="bold" />
+        <DynamicCurrency
+          amount={left}
+          size={15}
+          weight="bold"
+          color={getTextColor(getCurrencyStatus(income!, expenses!, true))}
+        />
         <ItemLabel>Balance</ItemLabel>
       </ItemWrapper>
     </Container>

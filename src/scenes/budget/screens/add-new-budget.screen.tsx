@@ -62,20 +62,22 @@ export default () => {
           <DynamicCard title="Add Items" showActionIcon={false}>
             <Space>
               <Label>Income</Label>
-              {data.tempIncome.map((item, index) => (
-                <CardItem
-                  key={index}
-                  shape="circle"
-                  iconName={item.category.icon}
-                  text={
-                    !!item.category.alias
-                      ? item.category.alias
-                      : item.category.name
-                  }
-                  textPosition="right"
-                  amount={item.amount}
-                />
-              ))}
+              <CardContainer>
+                {data.tempIncome.map((item, index) => (
+                  <CardItem
+                    key={index}
+                    shape="circle"
+                    iconName={item.category.icon}
+                    text={
+                      !!item.category.alias
+                        ? item.category.alias
+                        : item.category.name
+                    }
+                    textPosition="right"
+                    amount={item.amount}
+                  />
+                ))}
+              </CardContainer>
               <AddButton onPress={() => openOptionList("income")}>
                 <AddButtonLabel>
                   <FontAwesome5 name="plus" />
@@ -84,21 +86,23 @@ export default () => {
               </AddButton>
             </Space>
             <Space>
-              <Label>Expenses</Label>
-              {data.tempExpense.map((item, index) => (
-                <CardItem
-                  key={index}
-                  shape="circle"
-                  iconName={item.category.icon}
-                  text={
-                    !!item.category.alias
-                      ? item.category.alias
-                      : item.category.name
-                  }
-                  textPosition="right"
-                  amount={item.amount}
-                />
-              ))}
+              <Label>Planned Expenses</Label>
+              <CardContainer>
+                {data.tempExpense.map((item, index) => (
+                  <CardItem
+                    key={index}
+                    shape="circle"
+                    iconName={item.category.icon}
+                    text={
+                      !!item.category.alias
+                        ? item.category.alias
+                        : item.category.name
+                    }
+                    textPosition="right"
+                    amount={item.amount}
+                  />
+                ))}
+              </CardContainer>
               <AddButton onPress={() => openOptionList("expense")}>
                 <AddButtonLabel>
                   <FontAwesome5 name="plus" />
@@ -107,7 +111,12 @@ export default () => {
               </AddButton>
             </Space>
           </DynamicCard>
-          <SaveButton disabled={!isValid} onPress={handleSubmit(onSubmit)}>
+          <SaveButton
+            disabled={
+              !isValid || !data.tempExpense.length || !data.tempIncome.length
+            }
+            onPress={handleSubmit(onSubmit)}
+          >
             <ButtonTitle>Save</ButtonTitle>
           </SaveButton>
         </DetailContainer>
@@ -117,6 +126,15 @@ export default () => {
 };
 const Space = styled.View`
   margin-bottom: 20px;
+`;
+
+const CardContainer = styled.View`
+  flex-direction: column;
+  row-gap: 10px;
+  padding: 10px 0;
+  background-color: #fff;
+  width: 100%;
+  align-self: center;
 `;
 
 const Title = styled.Text`
@@ -146,8 +164,12 @@ const TextField = styled.TextInput`
   font-size: 18px;
 `;
 
-const SaveButton = styled.TouchableOpacity`
-  background-color: #000;
+interface SaveButtonProps {
+  disabled?: boolean;
+}
+
+const SaveButton = styled.TouchableOpacity<SaveButtonProps>`
+  background-color: ${({ disabled }) => (disabled ? "#ccc" : "#000")};
   padding: 15px;
   border-radius: 12px;
 `;
