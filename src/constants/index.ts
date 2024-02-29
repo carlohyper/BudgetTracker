@@ -45,6 +45,10 @@ export const ENTERTAINMENT: Categories[] = [
     name: "Subscriptions",
     icon: "youtube-subscription",
   },
+  {
+    name: "Internet",
+    icon: "wifi",
+  },
 ];
 
 export const UTILITIES: Categories[] = [
