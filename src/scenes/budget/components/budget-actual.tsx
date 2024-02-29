@@ -3,11 +3,11 @@ import { Alert, Text } from "react-native";
 
 import { ActionContainer } from "../styles/budget-details.style";
 
-import { CardItem, DynamicCard, DynamicCurrency } from "@components";
+import { CardItem, DynamicCard, DynamicCurrency, SubLabel } from "@components";
 import { IncomeItem } from "../interfaces";
 import { BudgetItem } from "src/stores/interfaces";
 import { useBudgetDetails } from "../hooks/use-budget-details.hook";
-import { getTotalAmount } from "@core/helpers";
+import { getCurrencyStatus, getTextColor, getTotalAmount } from "@core/helpers";
 
 interface BudgetActualProps {
   budget: BudgetItem;
@@ -16,7 +16,16 @@ interface BudgetActualProps {
 export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
   budget,
 }) => {
-  const { getCategory } = useBudgetDetails();
+  const {
+    income,
+    entertainment,
+    utilities,
+    savings,
+    misc,
+    getCategory,
+    getIncomeAmount,
+    getExpenseAmount,
+  } = useBudgetDetails();
   return (
     <ActionContainer>
       <DynamicCard
@@ -34,7 +43,7 @@ export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
             }
             textPosition="right"
             amount={item.amount}
-            actual={31800}
+            actual={getIncomeAmount(item.category.name)}
             isExpenses={false}
           />
         ))}
@@ -43,13 +52,11 @@ export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
         title="Savings"
         onPress={() => Alert.alert("Add Savings")}
         subLabel={
-          <Text>
-            <DynamicCurrency
-              amount={getTotalAmount(budget?.data.expense, "savings")}
-            />
-            &nbsp; / &nbsp;
-            <DynamicCurrency amount={2000} color="#AAAAAA" size={12} />
-          </Text>
+          <SubLabel
+            amount={budget?.data.expense}
+            actual={savings}
+            category="savings"
+          ></SubLabel>
         }
       >
         {budget?.data.expense
@@ -64,7 +71,7 @@ export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
               }
               textPosition="right"
               amount={item.amount}
-              actual={900}
+              actual={getExpenseAmount(item.category.name)}
             />
           ))}
       </DynamicCard>
@@ -72,13 +79,11 @@ export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
         title="Utilities"
         onPress={() => Alert.alert("Add Utilities")}
         subLabel={
-          <Text>
-            <DynamicCurrency
-              amount={getTotalAmount(budget?.data.expense, "utilities")}
-            />
-            &nbsp; / &nbsp;
-            <DynamicCurrency amount={4800} color="#00dd55" size={12} />
-          </Text>
+          <SubLabel
+            amount={budget?.data.expense}
+            actual={utilities}
+            category="utilities"
+          ></SubLabel>
         }
       >
         {budget?.data.expense
@@ -93,7 +98,7 @@ export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
               }
               textPosition="right"
               amount={item.amount}
-              actual={900}
+              actual={getExpenseAmount(item.category.name)}
             />
           ))}
       </DynamicCard>
@@ -101,13 +106,11 @@ export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
         title="Entertainment"
         onPress={() => Alert.alert("Add Entertainment")}
         subLabel={
-          <Text>
-            <DynamicCurrency
-              amount={getTotalAmount(budget?.data.expense, "entertainment")}
-            />
-            &nbsp; / &nbsp;
-            <DynamicCurrency amount={4800} color="#00dd55" size={12} />
-          </Text>
+          <SubLabel
+            amount={budget?.data.expense}
+            actual={entertainment}
+            category="entertainment"
+          ></SubLabel>
         }
       >
         {budget?.data.expense
@@ -124,7 +127,7 @@ export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
               }
               textPosition="right"
               amount={item.amount}
-              actual={900}
+              actual={getExpenseAmount(item.category.name)}
             />
           ))}
       </DynamicCard>
@@ -132,13 +135,11 @@ export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
         title="Miscelleneous"
         onPress={() => Alert.alert("Add Miscelleneous")}
         subLabel={
-          <Text>
-            <DynamicCurrency
-              amount={getTotalAmount(budget?.data.expense, "misc")}
-            />
-            &nbsp; / &nbsp;
-            <DynamicCurrency amount={4000} color="#FF0000" size={12} />
-          </Text>
+          <SubLabel
+            amount={budget?.data.expense}
+            actual={misc}
+            category="misc"
+          ></SubLabel>
         }
       >
         {budget?.data.expense
@@ -153,7 +154,7 @@ export const BudgetActual: React.FC<Partial<BudgetActualProps>> = ({
               }
               textPosition="right"
               amount={item.amount}
-              actual={900}
+              actual={getExpenseAmount(item.category.name)}
             />
           ))}
       </DynamicCard>

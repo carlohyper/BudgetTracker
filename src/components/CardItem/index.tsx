@@ -6,7 +6,10 @@ import { ViewProps } from "react-native";
 import { Text } from "../Text";
 import { IconNames } from "@types";
 import { DynamicCurrency } from "../DynamicCurrency";
-import { getTextColor } from "src/@core/helpers/currency-color.helper";
+import {
+  getCurrencyStatus,
+  getTextColor,
+} from "src/@core/helpers/currency-color.helper";
 import { CategoryItem } from "../CategoryItem";
 
 export interface CardItemProps extends ViewProps {
@@ -30,23 +33,6 @@ export const CardItem: React.FC<CardItemProps> = ({
   isExpenses = true,
   color,
 }) => {
-  let result = "";
-
-  if (isExpenses) {
-    result =
-      amount === actual
-        ? "equal"
-        : !!amount && !!actual && amount > actual
-        ? "greater"
-        : "lesser";
-  } else {
-    result =
-      amount === actual
-        ? "equal"
-        : !!amount && !!actual && actual > amount
-        ? "greater"
-        : "lesser";
-  }
   return (
     <Container textPosition={textPosition}>
       <CategoryWrapper>
@@ -59,13 +45,15 @@ export const CardItem: React.FC<CardItemProps> = ({
         />
       </CategoryWrapper>
       <Text>
-        {amount && <DynamicCurrency amount={amount} />}
-        {actual && (
+        {amount != undefined && <DynamicCurrency amount={amount} />}
+        {actual != undefined && (
           <>
             &nbsp; / &nbsp;
             <DynamicCurrency
               amount={actual}
-              color={getTextColor(result)}
+              color={getTextColor(
+                getCurrencyStatus(amount!, actual!, isExpenses)
+              )}
               size={12}
             />
           </>

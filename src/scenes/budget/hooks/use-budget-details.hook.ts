@@ -5,6 +5,7 @@ import { ExpenseItem, IncomeItem } from "../interfaces";
 import { BudgetStackParamList } from "@types";
 import { useExpenseStore } from "src/stores/expense.store";
 import { getTotalAmount, getCategory } from "@core/helpers";
+import { MONTH_LIST } from "@constants";
 
 export const useBudgetDetails = () => {
   const navigation = useNavigation();
@@ -15,6 +16,55 @@ export const useBudgetDetails = () => {
   const { data } = useExpenseStore((state) => state);
 
   const filteredData = data.budget.filter((item) => item.id === budgetId)[0];
+  const expenses = data.expense;
+
+  const expenseData = data.expense.filter((item) => {
+    const date = new Date(item.date);
+    const month = MONTH_LIST[date.getMonth()];
+    return filteredData.title === month;
+  });
+
+  const incomeData = data.income.filter((item) => {
+    const date = new Date(item.date);
+    const month = MONTH_LIST[date.getMonth()];
+    return filteredData.title === month;
+  });
+
+  console.log("expenseData", expenseData);
+
+  const income = incomeData.filter(
+    (item) => getCategory(item.category.name) === "income"
+  );
+  const entertainment = expenseData.filter(
+    (item) => getCategory(item.category.name) === "entertainment"
+  );
+  const utilities = expenseData.filter(
+    (item) => getCategory(item.category.name) === "utilities"
+  );
+  const savings = expenseData.filter(
+    (item) => getCategory(item.category.name) === "savings"
+  );
+  const misc = expenseData.filter(
+    (item) => getCategory(item.category.name) === "misc"
+  );
+
+  const getIncomeAmount = (name: string) => {
+    const income = incomeData.filter((item) => item.category.name === name);
+    console.log("name", name);
+    console.log("incomeData", incomeData);
+    console.log("income", income);
+    if (income.length) return income[0].amount;
+    return 0;
+  };
+
+  const getExpenseAmount = (name: string) => {
+    const expense = expenseData.filter((item) => item.category.name === name);
+    console.log("expense", expense);
+    if (expense.length) return expense[0].amount;
+    return 0;
+  };
+
+  // console.log(expenses);
 
   const plannedTotal = getTotalAmount(filteredData?.data.expense);
 
@@ -130,10 +180,17 @@ export const useBudgetDetails = () => {
   return {
     BUTTONS,
     selectedBtn,
-    setSelectedBtn,
     DATA,
     filteredData,
     plannedTotal,
+    income,
+    entertainment,
+    utilities,
+    savings,
+    misc,
+    setSelectedBtn,
     getCategory,
+    getIncomeAmount,
+    getExpenseAmount,
   };
 };

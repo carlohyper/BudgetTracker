@@ -31,8 +31,8 @@ export const useExpenseStore = create<State>((set) => ({
               amount: 30000,
               category: {
                 icon: "credit-card-check-outline",
-                name: "Income",
-                alias: "",
+                name: "Salary",
+                alias: "Income",
               },
               date: "2024-01-22T08:47:03.512Z",
             },
@@ -140,10 +140,11 @@ export const useExpenseStore = create<State>((set) => ({
         tempIncome: [...state.data.tempIncome, ...income],
       },
     })),
-    addBudget: (budget) => set((state) => ({
+  addBudget: (budget) =>
+    set((state) => ({
       data: {
         ...state.data,
-        budget: [...state.data.budget, budget]
-      }
-    }))
+        budget: [...state.data.budget, budget],
+      },
+    })),
 }));
