@@ -36,7 +36,7 @@ export function HomeScreen() {
 
   return (
     <Tab.Navigator
-      initialRouteName="Add"
+      initialRouteName="Dashboard"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName: any;

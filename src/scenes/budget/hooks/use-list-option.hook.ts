@@ -41,7 +41,6 @@ export const useListOption = () => {
     // const temp = selected.concat(selectedTemp);
     setSelected([...selected, ...selectedTemp]);
     setSearchedText("");
-    console.log(selected);
   };
 
   const saveSelectedData = () => {

@@ -25,12 +25,12 @@ export interface IncomeItem {
 }
 
 export interface BudgetItem {
-  id: string;
+  id: string | number;
   title: string; // From Month input
   period: string; // Default Monthly
   data: {
     income: IncomeItem[]; // Default value is []
     expense: ExpenseItem[]; // Default value is []
-  }
-  date: string; 
+  };
+  date: string;
 }

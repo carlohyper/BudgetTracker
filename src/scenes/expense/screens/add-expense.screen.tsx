@@ -27,8 +27,6 @@ export default () => {
   );
 
   const onSubmit = (data: FieldValues) => {
-    console.log(selectedType);
-
     if (selectedType === "expense") {
       return addExpense({
         id: uuid(),

@@ -14,11 +14,16 @@ export const CardContainer = styled.View`
   border: 1px solid #eee;
 `;
 
-export const DateSelector = styled(CardContainer)`
+export const BudgetHeader = styled(CardContainer)`
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   border-radius: 100px;
+`;
+
+export const BudgetHeaderText = styled.Text`
+  font-size: 20px;
+  font-weight: 600;
 `;
 
 export const PlannedExpenses = styled(CardContainer)`

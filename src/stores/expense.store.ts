@@ -18,7 +18,52 @@ interface State {
 
 export const useExpenseStore = create<State>((set) => ({
   data: {
-    budget: [],
+    budget: [
+      {
+        id: 1,
+        title: "February",
+        period: "Monthly",
+        data: {
+          income: [
+            {
+              id: "1",
+              amount: 30000,
+              category: {
+                icon: "credit-card-check-outline",
+                name: "Income",
+                alias: "",
+              },
+              date: "2024-01-22T08:47:03.512Z",
+            },
+          ],
+          name: "Gym",
+          icon: "dumbbell",
+          expense: [
+            {
+              id: "1",
+              amount: 5000,
+              category: {
+                icon: "home-city",
+                name: "Rent",
+                alias: "Rent",
+              },
+              date: "2024-01-22T08:47:03.512Z",
+            },
+            {
+              id: "2",
+              amount: 500,
+              category: {
+                icon: "dumbbell",
+                name: "Gym",
+                alias: "Gym Fee",
+              },
+              date: "2024-01-22T08:47:03.512Z",
+            },
+          ],
+        },
+        date: "2024-01-22T08:47:03.512Z",
+      },
+    ],
     expense: [
       {
         id: "1",
